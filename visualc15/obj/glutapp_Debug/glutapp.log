@@ -1,0 +1,7 @@
+﻿  App.cpp
+  app_main.cpp
+  GlutApp.cpp
+c:\users\pokev\desktop\cse165\final_project\glutapp\glutapp.cpp(42): warning C4305: '-=': truncation from 'double' to 'float'
+  Generating Code...
+App.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  glutapp.vcxproj -> C:\Users\pokev\Desktop\CSE165\final_project\GlutApp\visualc15\obj\glutapp_Debug\glutapp.exe
