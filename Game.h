@@ -1,6 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Player.h"
+#include "Enemy.h"
+#include "Projectile.h"
+#include "Powerup.h"
+
 class Game {
 	bool win;
 public:
