@@ -1,5 +1,15 @@
 ﻿  App.cpp
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(17): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(27): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\pokev\desktop\cse165\final_project\glutapp\game.h(38): warning C4018: '<': signed/unsigned mismatch
   app_main.cpp
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(17): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\pokev\desktop\cse165\final_project\glutapp\enemy.h(27): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\pokev\desktop\cse165\final_project\glutapp\game.h(38): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
 App.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   glutapp.vcxproj -> C:\Users\pokev\Desktop\CSE165\final_project\GlutApp\visualc15\obj\glutapp_Debug\glutapp.exe

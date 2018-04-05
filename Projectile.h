@@ -4,13 +4,10 @@
 #include "Object.h"
 
 class Projectile : public Object {
-	int speed;
 	
 public:
 	Projectile();
 	~Projectile();
-	
-	int getSpeed();
 };
 
 #endif

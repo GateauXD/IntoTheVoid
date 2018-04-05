@@ -10,14 +10,12 @@ protected:
 	int health;
 	
 public:
-	Ship();
-	~Ship();
 	
-	int getFirerate();
-	int getHealth();
+	int getFirerate() { return firerate; }
+	int getHealth() { return health; }
 	
-	void setFirerate(int n);
-	void setHealth(int n);
+	void setFirerate(int n) { firerate = n; }
+	void setHealth(int n) { health = n; }
 };
 
 #endif

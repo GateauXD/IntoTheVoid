@@ -4,17 +4,42 @@
 #include "Rect.h"
 
 class Object {
-
+	
 protected:
 //  Texture sprite;
     Rect *hitbox; // position and collision
+	float speed;
 
 public:
-	Object();
-	~Object();
+
+	~Object() {
+		delete hitbox;
+	}
 	
-	virtual void checkCollision(int x, int y);
-	virtual void getPosition(int &x, int &y); // could return a Vec
+	float getSpeed() const { return speed; }
+	
+	bool checkCollision(float x, float y) {
+		return hitbox->contains(x,y);
+	}
+	void getPosition(float &x, float &y) { // could return a Vec
+		x = hitbox->getX() + hitbox->getWidth() / 2;
+		y = hitbox->getY() + hitbox->getHeight() / 2;
+	}
 };
+
+/* // LINKER ERROR, MAKING INLINE
+Object::~Object() {
+	delete hitbox;
+}
+
+bool Object::checkCollision(float x, float y) {
+	return hitbox->contains(x,y);
+}
+
+void Object::getPosition(float &x, float &y) {
+	x = hitbox->getX() + hitbox->getWidth() / 2;
+	y = hitbox->getY() + hitbox->getHeight() / 2;
+}
+*/
 
 #endif
