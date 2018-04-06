@@ -1,40 +1,29 @@
 #include "App.h"
 
+#include <iostream>
+
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
     mx = 0.0;
     my = 0.0;
-	
-	game = new Game();
+
+//	DIFF MODE NEEDS WORK
+//
+//	int diff = 0;
+//	std::cout << "Enter difficulty [1, 10]" << std::endl;
+//	std::cin >> diff;
+//	if (diff) {
+//		game = new Game(diff);
+//	}
+//	else {
+		game = new Game();
+//	}
 }
 
 void App::draw() {
 	if (!game->isWon()) {
-		// Clear the screen
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		// Set background color to black
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		
-		// Set up the transformations stack
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		
-		glColor3d( 1, 1, 0 );
-		glPolygonMode(GL_FRONT, GL_FILL);
-		glBegin(GL_POLYGON);
-
-		glVertex2f( -0.5, 0.5 );
-		glVertex2f( 0.5, 0.5 );
-		glVertex2f( 0.5, -0.5 );
-		glVertex2f( -0.5, -0.5 );
-
-		glEnd();
-		
-		// We have been drawing everything to the back buffer
-		// Swap the buffers to see the result of what we drew
-		glFlush();
-		glutSwapBuffers();
+		game->draw();
+		game->print();
 	}
 	else {
 		exit(0);

@@ -11,8 +11,8 @@ protected:
 	
 public:
 	
-	int getFirerate() { return firerate; }
-	int getHealth() { return health; }
+	int getFirerate() const { return firerate; }
+	int getHealth() const { return health; }
 	
 	void setFirerate(int n) { firerate = n; }
 	void setHealth(int n) { health = n; }

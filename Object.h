@@ -12,34 +12,33 @@ protected:
 
 public:
 
-	~Object() {
+	virtual ~Object() {
 		delete hitbox;
 	}
 	
 	float getSpeed() const { return speed; }
 	
-	bool checkCollision(float x, float y) {
+	//	virtual keyword added to allow for different child collision types (eg. circular)
+	virtual bool checkCollision(float x, float y) {
 		return hitbox->contains(x,y);
 	}
-	void getPosition(float &x, float &y) { // could return a Vec
+	virtual void getPosition(float &x, float &y) { // could return a Vec
 		x = hitbox->getX() + hitbox->getWidth() / 2;
 		y = hitbox->getY() + hitbox->getHeight() / 2;
 	}
+	
+//hitbox
+	virtual void getHB(float &x, float &y, float &w, float &h) {
+		x = hitbox->getX();
+		y = hitbox->getY();
+		w = hitbox->getWidth();
+		h = hitbox->getHeight();
+	}
+	virtual void getHBColor(float &r, float &g, float &b) {
+		r = hitbox->getRed();
+		g = hitbox->getGreen();
+		b = hitbox->getBlue();
+	}
 };
-
-/* // LINKER ERROR, MAKING INLINE
-Object::~Object() {
-	delete hitbox;
-}
-
-bool Object::checkCollision(float x, float y) {
-	return hitbox->contains(x,y);
-}
-
-void Object::getPosition(float &x, float &y) {
-	x = hitbox->getX() + hitbox->getWidth() / 2;
-	y = hitbox->getY() + hitbox->getHeight() / 2;
-}
-*/
 
 #endif
