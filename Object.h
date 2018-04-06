@@ -26,6 +26,7 @@ public:
 		x = hitbox->getX() + hitbox->getWidth() / 2;
 		y = hitbox->getY() + hitbox->getHeight() / 2;
 	}
+	virtual void movePos(unsigned char key) = 0; // may not need pure virtual (powerup), just want to style on 'em
 	
 //hitbox
 	virtual void getHB(float &x, float &y, float &w, float &h) {

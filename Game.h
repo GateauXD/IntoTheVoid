@@ -20,15 +20,15 @@
 #endif
 
 class Game {
-	bool win;
-	Player *player;
+//  Texture background
+	bool gameOver;
 	std::vector < Object* > objList;
 
 public:
 	Game() {
-		win = false;
+		gameOver = false;
 
-		player = new Player();
+		Player *player = new Player();
 		objList.push_back(player);
 		
 		srand (time(NULL));
@@ -36,9 +36,9 @@ public:
 		objList.push_back(e);
 	}
 	Game(int n) {
-		win = false;
+		gameOver = false;
 
-		player = new Player();
+		Player *player = new Player();
 		objList.push_back(player);
 		
 		srand (time(NULL));
@@ -53,22 +53,20 @@ public:
 			delete objList.at(i);
 	}
 	
-	bool isWon() const {
-		return win;
-	}
+	bool isOver() const { return gameOver; }
 	
 	void onClick(float mx, float my) {}
 	void onPress(unsigned char key) {
-		player->movePos(key);
+		for (unsigned i = 0; i < objList.size(); i++) {
+			objList.at(i)->movePos(key);
+		}
 	}
+	// Currently draws hitboxes and no background, eventually will draw Textures
 	void draw() {
-		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		// Set background color to black
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		
-		// Set up the transformations stack
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
@@ -89,12 +87,21 @@ public:
 
 			glEnd();
 		}
-		
-		// We have been drawing everything to the back buffer
-		// Swap the buffers to see the result of what we drew
+
 		glFlush();
 		glutSwapBuffers();
+		
+//		detectCollision();
 	}
+
+	// TODO: Figure out collision
+	// THIS FUNCTION DOES NOT WORK AS INTENDED	
+//	void detectCollision() {
+//		for (unsigned i = 1; i < objList.size(); i++) {	// skips player (obj[0]
+//			if (objList.at(i)->checkCollision(objList.at(0)))
+//				gameOver = true;
+//		}
+//	}
 	
 //	DEBUG
 	void print() {

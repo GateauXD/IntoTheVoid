@@ -17,6 +17,7 @@ public:
 		
 		firerate = 5;
 		health = 20;
+		speed = 0.1;
 	}
 	Enemy(int rate, int h) {
 		float x = (float)(rand() % 80) / 100;			// float between 0 and 0.8
@@ -26,8 +27,42 @@ public:
 		
 		firerate = rate;
 		health = h;
+		speed = 0.1;
 	}
 	~Enemy() {}
+	
+	void movePos(unsigned char key) {
+		int move = rand() % 4;							// int between 0 and 3
+		switch (move) {
+			float x;
+			float y;
+
+			case 0:	//up
+				y = hitbox->getY();
+				if (y + speed <= 1) {
+					hitbox->setY(y + speed);
+				}
+				break;
+			case 1:	//left
+				x = hitbox->getX();
+				if (x - speed >= -1) {
+					hitbox->setX(x - speed);
+				}
+				break;
+			case 2:	//down
+				y = hitbox->getY();
+				if (y - hitbox->getHeight() - speed >= -1) {
+					hitbox->setY(y - speed);
+				}
+				break;
+			case 3:	//right
+				x = hitbox->getX();
+				if (x + hitbox->getWidth() + speed <= 1) {
+					hitbox->setX(x + speed);
+				}
+				break;
+		}
+	}
 };
 
 #endif

@@ -55,8 +55,6 @@ public:
 					hitbox->setX(x + speed);
 				}
 				break;
-				
-			//collision detection will likely go here;
 		}
 	}
 };
