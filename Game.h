@@ -23,6 +23,7 @@ class Game {
 //  Texture background
 	bool gameOver;
 	std::vector < Object* > objList;
+	int score;
 
 public:
 	Game() {
