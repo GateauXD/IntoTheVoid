@@ -12,9 +12,7 @@ protected:
 
 public:
 
-	virtual ~Object() {
-		delete hitbox;
-	}
+
 	
 	float getSpeed() const { return speed; }
 	
@@ -40,6 +38,11 @@ public:
 		g = hitbox->getGreen();
 		b = hitbox->getBlue();
 	}
+
+		virtual ~Object() {
+		delete hitbox;
+	}
 };
+
 
 #endif
