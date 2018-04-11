@@ -11,8 +11,6 @@ protected:
 	float speed;
 
 public:
-
-
 	
 	float getSpeed() const { return speed; }
 	
