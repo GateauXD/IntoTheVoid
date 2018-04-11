@@ -32,7 +32,7 @@ private:
     
 public:
     // Default constructor
-    GlutApp(const char* label="GlutApp", int x=50, int y=50, int w=500, int h=500);
+    GlutApp(const char* label="GlutApp", int x=50, int y=50, int w=1080, int h=1080);
     
     // A function to redraw the window
     void redraw();
