@@ -29,9 +29,9 @@ public:
 		health = h;
 		speed = 0.1;
 	}
-	~Enemy() {}
+	virtual ~Enemy() {}
 	
-	void movePos(unsigned char key) {
+	virtual void movePos(unsigned char key) {
 		int move = rand() % 4;							// int between 0 and 3
 		switch (move) {
 			float x;

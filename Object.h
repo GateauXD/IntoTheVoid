@@ -2,12 +2,13 @@
 #define OBJECT_H
 
 #include "Rect.h"
+//#include "Circle.h"
 
 class Object {
 	
 protected:
 //  Texture sprite;
-    Rect *hitbox; // position and collision
+    Shape *hitbox; // position and collision
 	float speed;
 
 public:
@@ -19,8 +20,7 @@ public:
 		return hitbox->contains(x,y);
 	}
 	virtual void getPosition(float &x, float &y) { // could return a Vec
-		x = hitbox->getX() + hitbox->getWidth() / 2;
-		y = hitbox->getY() + hitbox->getHeight() / 2;
+		hitbox->getPosition(x, y);
 	}
 	virtual void movePos(unsigned char key) = 0; // may not need pure virtual (powerup), just want to style on 'em
 	

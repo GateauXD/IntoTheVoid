@@ -1,10 +1,13 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <stdlib.h> //rand()
+#include <time.h> //time()
+
 class Shape{
 
 protected:
-	float x,y,red, green, blue;
+	float x, y, red, green, blue;
 
 public:
 	Shape(){
@@ -23,19 +26,6 @@ public:
 		blue = (float)(rand() % 100) / 100;
 	}
 
-	float getX() const{
-		return x;
-	}
-	float getY() const{
-		return y;
-	}
-	void setX(float x){
-		this->x = x;
-	}
-	void setY(float y){
-		this->y = y;
-	}
-
 	float getRed() const{
 		return red;
 	}
@@ -45,11 +35,28 @@ public:
 	float getBlue() const{
 		return blue;
 	}
-
+	
+	void setX(float x){
+		this->x = x;
+	}
+	void setY(float y){
+		this->y = y;
+	}
+	float getX() const{
+		return x;
+	}
+	float getY() const{
+		return y;
+	}
+	// PROXY, WILL FIX/REPLACE
+	virtual float getWidth() const{ return 0; }
+	virtual float getHeight() const{  return 0; }
+	
+	virtual void getPosition(float &xx, float &yy) = 0; // could return a Vec
 
 	virtual bool contains(float x, float y) = 0;
 
-	~Shape(){}
+	virtual ~Shape(){}
 };
 
 #endif

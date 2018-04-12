@@ -1,8 +1,6 @@
 #ifndef RECT_H
 #define RECT_H
 
-#include <stdlib.h> //rand()
-#include <time.h> //time()
 #include "Shape.h"
 
 class Rect: public Shape {
@@ -13,7 +11,7 @@ public:
 		width = 1.0f;
 		height = 1.0f;
 	}
-	Rect(float x, float y, float width, float height): Shape(x,y){
+	Rect(float x, float y, float width, float height): Shape(x, y){
 		this->width = width;
 		this->height = height;
 	}
@@ -26,12 +24,16 @@ public:
 	void setHeight(float h) {
 		height = h;
 	}
-	
-	float getWidth() {
+	float getWidth() const{
 		return width;
 	}
-	float getHeight() {
+	float getHeight() const{
 		return height;
+	}
+	
+	void getPosition(float &xx, float &yy) {
+		xx = x + width / 2;
+		yy = y + height / 2;
 	}
 	
 	bool contains(float xx, float yy) {
