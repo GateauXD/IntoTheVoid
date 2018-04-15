@@ -18,7 +18,9 @@ public:
 	
 	//	virtual keyword added to allow for different child collision types (eg. circular)
 	virtual bool checkCollision(float x, float y) {
-		return hitbox->contains(x,y);
+		float x,y,h,w;
+		obj->getHB(x,y,w,h);
+		return (hitbox->contains(x,y)||hitbox->contains(x+w,y)||hitbox->contains(x+w,y-h)||hitbox->contains(x,y-h));
 	}
 	virtual void getPosition(float &x, float &y) { // could return a Vec
 		x = hitbox->getX() + hitbox->getWidth() / 2;
