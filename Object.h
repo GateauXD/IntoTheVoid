@@ -2,13 +2,14 @@
 #define OBJECT_H
 
 #include "Rect.h"
+#include "TexRect.h"
 
 class Object {
 	
 protected:
-//  Texture sprite;
+    TexRect* tex;
     Rect *hitbox; // position and collision
-	float speed;
+    float speed;
 
 public:
 
@@ -43,6 +44,7 @@ public:
 
 		virtual ~Object() {
 		delete hitbox;
+			delete tex;
 	}
 };
 
