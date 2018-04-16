@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "TexRect.h" // for textures
 //#include "Projectile.h"
 //#include "Powerup.h"
 
@@ -20,7 +21,7 @@
 #endif
 
 class Game {
-//  Texture background
+	TexRect* background;
 	bool gameOver;
 	std::vector < Object* > objList;
 	int score;
@@ -35,6 +36,7 @@ public:
 		srand (time(NULL));
 		Enemy* e = new Enemy();
 		objList.push_back(e);
+		background = new TexRect("assets/background1.bmp", 1,1,-1, 1, 2, 2);
 	}
 	Game(int n) {
 		gameOver = false;
@@ -48,10 +50,12 @@ public:
 			e = new Enemy();
 			objList.push_back(e);
 		}
+		background = new TexRect("assets/background1.bmp", 1,1,-1, 1, 2, 2);
 	}
 	~Game() {
 		for (unsigned i = 0; i < objList.size(); i++)
 			delete objList.at(i);
+		delete background;
 	}
 	
 	bool isOver() const { return gameOver; }
@@ -88,6 +92,7 @@ public:
 
 			glEnd();
 		}
+		background->draw();
 
 		glFlush();
 		glutSwapBuffers();
@@ -95,14 +100,9 @@ public:
 //		detectCollision();
 	}
 
-	// TODO: Figure out collision
-	// THIS FUNCTION DOES NOT WORK AS INTENDED	
-//	void detectCollision() {
-//		for (unsigned i = 1; i < objList.size(); i++) {	// skips player (obj[0]
-//			if (objList.at(i)->checkCollision(objList.at(0)))
-//				gameOver = true;
-//		}
-//	}
+	// collision
+	// This sould work now	
+	void detectCollision(){}
 	
 //	DEBUG
 	void print() {
