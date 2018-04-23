@@ -13,19 +13,20 @@ public:
 		
 		firerate = 5;
 		health = 20;
-		speed = 0.1;
+		speed = 0.05;
 	}
 	Player(int rate, int h){
 		hitbox = new Rect(-1, 0.1, 0.2, 0.2); //spawn at left side of screen
 		
 		firerate = rate;
 		health = h;
-		speed = 0.1;
+		speed = 0.05;
 	}
 	~Player() {
 		std::cout << "Deleting Player" << std::endl;
 	}
 	
+	//Change these to fuctions. The move up and down things
 	void movePos(unsigned char key) {
 		switch (key) {
 			float x;

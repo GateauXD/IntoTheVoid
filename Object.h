@@ -6,7 +6,7 @@
 
 class Object {
 	
-protected:
+public:
 //  Texture sprite;
     Shape *hitbox; // position and collision
 	float speed;
@@ -22,6 +22,7 @@ public:
 	virtual void getPosition(float &x, float &y) { // could return a Vec
 		hitbox->getPosition(x, y);
 	}
+
 	virtual void movePos(unsigned char key) = 0; // may not need pure virtual (powerup), just want to style on 'em
 	
 //hitbox
@@ -32,9 +33,13 @@ public:
 		h = hitbox->getHeight();
 	}
 	virtual void getHBColor(float &r, float &g, float &b) {
-		r = hitbox->getRed();
-		g = hitbox->getGreen();
-		b = hitbox->getBlue();
+	//	r = hitbox->getRed();
+	//	g = hitbox->getGreen();
+	//	b = hitbox->getBlue();
+
+		r = 1;
+		g = 1;
+		b = 1;
 	}
 
 		virtual ~Object() {

@@ -97,13 +97,21 @@ public:
 		glFlush();
 		glutSwapBuffers();
 		
-//		detectCollision();
+		detectCollision();
 	}
 
 	// collision
 	// This sould work now	
-	void detectCollision(){}
-	
+	void detectCollision(){
+		int i = 0;
+		while(i < objList.size()){
+			if(objList[0]->checkCollision(objList[i]->hitbox->getX(), objList[i]->hitbox->getY())){
+				std::cout << "HIT!!!" << std::endl;
+			}
+			i++;
+		}
+	}
+
 //	DEBUG
 	void print() {
 		for (unsigned i = 0; i < objList.size(); i++) {
