@@ -10,14 +10,14 @@ class Player : public Ship {
 public:
 	Player(){
 		hitbox = new Rect(-1, 0.1, 0.2, 0.2); //spawn at left side of screen
-		
+		objectTex = new TexRect("assets/PlayerShip.bmp", 1,1,-1, .1, .2, .2);
 		firerate = 5;
 		health = 20;
 		speed = 0.05;
 	}
 	Player(int rate, int h){
 		hitbox = new Rect(-1, 0.1, 0.2, 0.2); //spawn at left side of screen
-		
+		objectTex = new TexRect("assets/PlayerShip.bmp", 1,1,-1, .1, .2, .2);
 		firerate = rate;
 		health = h;
 		speed = 0.05;

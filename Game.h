@@ -25,7 +25,7 @@ class Game {
 	bool gameOver;
 	std::vector < Object* > objList;
 	int score;
-
+	TexRect* test;
 public:
 	Game() {
 		gameOver = false;
@@ -90,9 +90,12 @@ public:
 			glVertex2f( x + w, y - h );
 			glVertex2f( x, y - h );
 
+
 			glEnd();
+			objList.at(i)->objectTex->draw();
 		}
 		background->draw();
+
 
 		glFlush();
 		glutSwapBuffers();

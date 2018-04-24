@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include "Rect.h"
+#include "TexRect.h"
 //#include "Circle.h"
 
 class Object {
@@ -9,6 +10,7 @@ class Object {
 public:
 //  Texture sprite;
     Shape *hitbox; // position and collision
+    TexRect* objectTex;
 	float speed;
 
 public:

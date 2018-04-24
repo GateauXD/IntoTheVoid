@@ -2,9 +2,11 @@
 #define RECT_H
 
 #include "Shape.h"
+#include "TexRect.h"
 
 class Rect: public Shape {
 	float width, height;
+	TexRect* objectTex;
 
 public:
 	Rect(): Shape(){
