@@ -2,17 +2,18 @@
 #define OBJECT_H
 
 #include "Rect.h"
+#include "TexRect.h"
+//#include "Circle.h"
 
 class Object {
 	
-protected:
+public:
 //  Texture sprite;
-    Rect *hitbox; // position and collision
+    Shape *hitbox; // position and collision
+    TexRect* objectTex;
 	float speed;
 
 public:
-
-
 	
 	float getSpeed() const { return speed; }
 	
@@ -21,9 +22,9 @@ public:
 		return hitbox->contains(x,y);
 	}
 	virtual void getPosition(float &x, float &y) { // could return a Vec
-		x = hitbox->getX() + hitbox->getWidth() / 2;
-		y = hitbox->getY() + hitbox->getHeight() / 2;
+		hitbox->getPosition(x, y);
 	}
+
 	virtual void movePos(unsigned char key) = 0; // may not need pure virtual (powerup), just want to style on 'em
 	
 //hitbox
@@ -34,9 +35,13 @@ public:
 		h = hitbox->getHeight();
 	}
 	virtual void getHBColor(float &r, float &g, float &b) {
-		r = hitbox->getRed();
-		g = hitbox->getGreen();
-		b = hitbox->getBlue();
+	//	r = hitbox->getRed();
+	//	g = hitbox->getGreen();
+	//	b = hitbox->getBlue();
+
+		r = 1;
+		g = 1;
+		b = 1;
 	}
 
 		virtual ~Object() {

@@ -1,65 +1,41 @@
 #ifndef RECT_H
 #define RECT_H
 
-#include <stdlib.h> //rand()
-#include <time.h> //time()
+#include "Shape.h"
+#include "TexRect.h"
 
-class Rect {
-	float x, y, width, height, red, green, blue;
+class Rect: public Shape {
+	float width, height;
+	TexRect* objectTex;
 
 public:
-	Rect() {
-		x = 0.0f;
-		y = 0.0f;
+	Rect(): Shape(){
 		width = 1.0f;
 		height = 1.0f;
-		red = (float)(rand() % 100) / 100;		// float between 0 and 1
-		green = (float)(rand() % 100) / 100;
-		blue = (float)(rand() % 100) / 100;
 	}
-	Rect(float x, float y, float width, float height) {
-		this->x = x;
-		this->y = y;
+	Rect(float x, float y, float width, float height): Shape(x, y){
 		this->width = width;
 		this->height = height;
-		red = (float)(rand() % 100) / 100;
-		green = (float)(rand() % 100) / 100;
-		blue = (float)(rand() % 100) / 100;
 	}
+
 	~Rect() {}
 	
-	void setX(float xx) {
-		x = xx;
-	}
-	void setY(float yy) {
-		y = yy;
-	}
 	void setWidth(float w) {
 		width = w;
 	}
 	void setHeight(float h) {
 		height = h;
 	}
-	float getX() {
-		return x;
-	}
-	float getY() {
-		return y;
-	}
-	float getWidth() {
+	float getWidth() const{
 		return width;
 	}
-	float getHeight() {
+	float getHeight() const{
 		return height;
 	}
-	float getRed() {
-		return red;
-	}
-	float getGreen() {
-		return green;
-	}
-	float getBlue() {
-		return blue;
+	
+	void getPosition(float &xx, float &yy) {
+		xx = x + width / 2;
+		yy = y + height / 2;
 	}
 	
 	bool contains(float xx, float yy) {

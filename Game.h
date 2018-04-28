@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "TexRect.h" // for textures
 //#include "Projectile.h"
 //#include "Powerup.h"
 
@@ -20,11 +21,11 @@
 #endif
 
 class Game {
-//  Texture background
+	TexRect* background;
 	bool gameOver;
 	std::vector < Object* > objList;
 	int score;
-
+	TexRect* test;
 public:
 	Game() {
 		gameOver = false;
@@ -35,6 +36,7 @@ public:
 		srand (time(NULL));
 		Enemy* e = new Enemy();
 		objList.push_back(e);
+		background = new TexRect("assets/background1.bmp", 1,1,-1, 1, 2, 2);
 	}
 	Game(int n) {
 		gameOver = false;
@@ -48,10 +50,12 @@ public:
 			e = new Enemy();
 			objList.push_back(e);
 		}
+		background = new TexRect("assets/background1.bmp", 1,1,-1, 1, 2, 2);
 	}
 	~Game() {
 		for (unsigned i = 0; i < objList.size(); i++)
 			delete objList.at(i);
+		delete background;
 	}
 	
 	bool isOver() const { return gameOver; }
@@ -86,24 +90,31 @@ public:
 			glVertex2f( x + w, y - h );
 			glVertex2f( x, y - h );
 
+
 			glEnd();
+			objList.at(i)->objectTex->draw();
 		}
+		background->draw();
+
 
 		glFlush();
 		glutSwapBuffers();
 		
-//		detectCollision();
+		detectCollision();
 	}
 
-	// TODO: Figure out collision
-	// THIS FUNCTION DOES NOT WORK AS INTENDED	
-//	void detectCollision() {
-//		for (unsigned i = 1; i < objList.size(); i++) {	// skips player (obj[0]
-//			if (objList.at(i)->checkCollision(objList.at(0)))
-//				gameOver = true;
-//		}
-//	}
-	
+	// collision
+	// This sould work now	
+	void detectCollision(){
+		int i = 0;
+		while(i < objList.size()){
+			if(objList[0]->checkCollision(objList[i]->hitbox->getX(), objList[i]->hitbox->getY())){
+				std::cout << "HIT!!!" << std::endl;
+			}
+			i++;
+		}
+	}
+
 //	DEBUG
 	void print() {
 		for (unsigned i = 0; i < objList.size(); i++) {
