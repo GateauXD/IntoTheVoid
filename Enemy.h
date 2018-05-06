@@ -14,6 +14,7 @@ public:
 		float y = (float)(rand() % 180 - 80) / 100;		// float between -0.8 and 1
 		
 		hitbox = new Rect(x, y, 0.2, 0.2); // spawn random enemy on right side of screen
+		objectTex = new TexRect("assets/PlayerShip.bmp",-1, .1, .2, .2);
 		
 		firerate = 5;
 		health = 20;
@@ -24,14 +25,15 @@ public:
 		float y = (float)(rand() % 180 - 80) / 100;		// float between -0.8 and 1
 		
 		hitbox = new Rect(x, y, 0.2, 0.2); // spawn random enemy on right side of screen
+		objectTex = new TexRect("assets/PlayerShip.bmp",-1, .1, .2, .2);
 		
 		firerate = rate;
 		health = h;
 		speed = 0.1;
 	}
-	~Enemy() {}
+	virtual ~Enemy() {}
 	
-	void movePos(unsigned char key) {
+	virtual void movePos(unsigned char key) {
 		int move = rand() % 4;							// int between 0 and 3
 		switch (move) {
 			float x;

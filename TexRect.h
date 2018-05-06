@@ -3,39 +3,42 @@
 
 #if defined WIN32
 #include <freeglut.h>
+#include "../windows/SOIL.h"
 #elif defined __APPLE__
 #include <GLUT/glut.h>
+#include <SOIL.h>
 #else
 #include <GL/freeglut.h>
+#include <SOIL.h>
 #endif
 
-#include "RgbImage.h"
-
 class TexRect {
+public:
     float x;
     float y;
     float w;
     float h;
     GLuint texture_id;
-    int rows;
-    int cols;
-    
-    int curr_row;
-    int curr_col;
-    
-    bool complete;
-public:
-    TexRect (const char*, int, int, float, float, float, float);
-    
-    bool done();
+
+
+    TexRect (const char*, float, float, float, float);
     
     void draw();
     
-    void advance();
+    bool contains(float, float);
     
-    void incY();
+    void moveUp(float rate=0.01);
+    void moveDown(float rate=0.01);
+    void moveLeft(float rate=0.01);
+    void moveRight(float rate=0.01);
     
-    void reset();
+    void jump();
+    
+    bool rising;
+    bool movingLeft;
+   
+    float xinc;
+    float yinc;
 };
 
 #endif

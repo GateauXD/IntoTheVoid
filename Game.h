@@ -10,7 +10,7 @@
 #include "Enemy.h"
 #include "TexRect.h" // for textures
 //#include "Projectile.h"
-//#include "Powerup.h"
+#include "Powerup.h"
 
 #if defined WIN32
 #include <freeglut.h>
@@ -22,10 +22,10 @@
 
 class Game {
 	TexRect* background;
+	//Powerup* test;
 	bool gameOver;
 	std::vector < Object* > objList;
 	int score;
-
 public:
 	Game() {
 		gameOver = false;
@@ -36,7 +36,8 @@ public:
 		srand (time(NULL));
 		Enemy* e = new Enemy();
 		objList.push_back(e);
-		background = new TexRect("assets/background1.bmp", 1,1,-1, 1, 2, 2);
+		background =new TexRect("assets/background1.png",-1,1,2,2);
+		//test=new Powerup();
 	}
 	Game(int n) {
 		gameOver = false;
@@ -50,12 +51,13 @@ public:
 			e = new Enemy();
 			objList.push_back(e);
 		}
-		background = new TexRect("assets/background1.bmp", 1,1,-1, 1, 2, 2);
+		background = new TexRect("assets/background1.png",-1,1,2,2);
 	}
 	~Game() {
 		for (unsigned i = 0; i < objList.size(); i++)
 			delete objList.at(i);
 		delete background;
+		//delete test;
 	}
 	
 	bool isOver() const { return gameOver; }
@@ -90,36 +92,40 @@ public:
 			glVertex2f( x + w, y - h );
 			glVertex2f( x, y - h );
 
+
 			glEnd();
+			objList.at(i)->objectTex->draw();
 		}
+		//test->draw();
 		background->draw();
+
 
 		glFlush();
 		glutSwapBuffers();
 		
-//		detectCollision();
+		detectCollision();
 	}
 
 	// collision
 	// This sould work now	
-	void detectCollision() {
-		for (unsigned i = 1; i < objList.size(); i++) {	// skips player (obj[0]
-			if (objList.at(i)->checkCollision(objList.at(0)))
-			{
-				gameOver = true;
-				//Debug
-				std::cout<<"Collision detected"<<std::endl;
+	void detectCollision(){
+		int i = 0;
+		while(i < objList.size()){
+			if(objList[0]->checkCollision(objList[i]->hitbox->getX(), objList[i]->hitbox->getY())){
+				std::cout << "HIT!!!" << std::endl;
 			}
+			i++;
 		}
 	}
-	
+
 //	DEBUG
-	void print() {
-		for (unsigned i = 0; i < objList.size(); i++) {
-			float x, y, w, h;
-			objList.at(i)->getHB(x, y, w, h);
-			std::cout << "x=" << x << ", y=" << y << ", w=" << w << ", h=" << h << std::endl;
-		}
+	void print() 
+	{
+		//for (unsigned i = 0; i < objList.size(); i++) {
+			//float x, y, w, h;
+			//objList.at(i)->getHB(x, y, w, h);
+			//std::cout << "x=" << x << ", y=" << y << ", w=" << w << ", h=" << h << std::endl;
+		//}
 	}
 };
 
