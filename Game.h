@@ -63,11 +63,10 @@ public:
 	bool isOver() const { return gameOver; }
 	
 	void onClick(float mx, float my) {}
-	void onPress(unsigned char key) {
-		for (unsigned i = 0; i < objList.size(); i++) {
-			objList.at(i)->movePos(key);
-		}
-	}
+
+	void onPress(unsigned char key) {}
+
+	
 	// Currently draws hitboxes and no background, eventually will draw Textures
 	void draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,24 +77,9 @@ public:
 		glLoadIdentity();
 		
 		for (unsigned i = 0; i < objList.size(); i++) {
-			float x, y, w, h;
-			objList.at(i)->getHB(x, y, w, h);
-			float r, g, b;
-			objList.at(i)->getHBColor(r, g, b);
-			
-			glColor3d( r, g, b );
-			glPolygonMode(GL_FRONT, GL_FILL);
-			glBegin(GL_POLYGON);
-
-			glVertex2f( x, y );
-			glVertex2f( x + w, y );
-			glVertex2f( x + w, y - h );
-			glVertex2f( x, y - h );
-
-
-			glEnd();
 			objList.at(i)->objectTex->draw();
 		}
+
 		//test->draw();
 		background->draw();
 
@@ -106,12 +90,11 @@ public:
 		detectCollision();
 	}
 
-	// collision
 	// This sould work now	
 	void detectCollision(){
 		int i = 0;
 		while(i < objList.size()){
-			if(objList[0]->checkCollision(objList[i]->hitbox->getX(), objList[i]->hitbox->getY())){
+			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
 				std::cout << "HIT!!!" << std::endl;
 			}
 			i++;

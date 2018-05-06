@@ -34,6 +34,15 @@ public:
     
     void jump();
     
+    void getPosition(float x,float y);
+    float getX() const;
+    float getY() const;
+    void setX(float x);
+    void setY(float y);
+
+    float getWidth() const;
+    float getHeight() const;
+
     bool rising;
     bool movingLeft;
    
