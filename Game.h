@@ -11,6 +11,7 @@
 #include "TexRect.h" // for textures
 //#include "Projectile.h"
 #include "Powerup.h"
+#include "Score.h"
 
 #if defined WIN32
 #include <freeglut.h>
