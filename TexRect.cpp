@@ -135,6 +135,11 @@ void TexRect::moveUp(float rate){
 	y = 0.99;
     }
 }
+
+void TexRect::moveUpP(float rate){
+    y += rate;
+    
+}
 void TexRect::moveDown(float rate){
     y -= rate;
      if (y - h < -0.99){

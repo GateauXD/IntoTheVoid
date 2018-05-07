@@ -31,13 +31,15 @@ public:
     
     TexRect* background;
     
+    TexRect* bullet;
+    
     AnimatedRect* gameOver;
     
     bool up;
     bool down;
     bool left;
     bool right;
-    
+    bool shooting;
     bool moving;
     bool game_over;
     
