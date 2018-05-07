@@ -25,7 +25,7 @@ class Game {
 	//Powerup* test;
 	bool gameOver;
 	std::vector < Object* > objList;
-	int score;
+	Score* score;
 public:
 	Game() {
 		gameOver = false;
@@ -38,6 +38,7 @@ public:
 		
 		background =new TexRect("assets/background1.png",-1,1,2,2);
 		//test=new Powerup();
+		score = new Score( 0.7, 0.9 );
 	}
 
 	~Game() {
@@ -45,6 +46,7 @@ public:
 			delete objList.at(i);
 		delete background;
 		//delete test;
+		delete score;
 	}
 	
 	bool isOver() const { return gameOver; }
@@ -59,6 +61,9 @@ public:
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		glClearColor(0.0, 0.0, 0.0, 1.0);
+		
+		// drawing score to corner;
+		score->draw();
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
@@ -83,6 +88,7 @@ public:
 		while(i < objList.size()){
 			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
 				std::cout << "HIT!!!" << std::endl;
+				score->add(5);
 			}
 			i++;
 		}
