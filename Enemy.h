@@ -9,26 +9,27 @@
 class Enemy : public Ship {
 		
 public:
-	Enemy() {
-		float x = (float)(rand() % 80) / 100;			// float between 0 and 0.8
-		float y = (float)(rand() % 180 - 80) / 100;		// float between -0.8 and 1
-		
-		objectTex = new TexRect("assets/PlayerShip.bmp",-1, .1, .2, .2);
+	Enemy() {	
+		objectTex = new TexRect("assets/EnemyShip.png",.8, .1, .2, .2);
 		
 		firerate = 5;
 		health = 20;
 		speed = 0.1;
 	}
 	Enemy(int rate, int h) {
-		float x = (float)(rand() % 80) / 100;			// float between 0 and 0.8
-		float y = (float)(rand() % 180 - 80) / 100;		// float between -0.8 and 1
-		
-		objectTex = new TexRect("assets/PlayerShip.bmp",-1, .1, .2, .2);
+		objectTex = new TexRect("assets/EnemyShip.png",.8, .1, .2, .2);
 		
 		firerate = rate;
 		health = h;
 		speed = 0.1;
 	}
+	Enemy(float x, float y){
+		objectTex = new TexRect("assets/EnemyShip.png", x, y, .2, .2);
+		firerate = 5;
+		health = 20;
+		speed = 0.1;
+	}
+
 	virtual ~Enemy() {}
 	
 	virtual void movePos(unsigned char key) {

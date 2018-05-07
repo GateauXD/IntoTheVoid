@@ -34,25 +34,12 @@ public:
 		objList.push_back(player);
 		
 		srand (time(NULL));
-		Enemy* e = new Enemy();
-		objList.push_back(e);
+		spawnEnemies();
+		
 		background =new TexRect("assets/background1.png",-1,1,2,2);
 		//test=new Powerup();
 	}
-	Game(int n) {
-		gameOver = false;
 
-		Player *player = new Player();
-		objList.push_back(player);
-		
-		srand (time(NULL));
-		Enemy *e;
-		for (int i = 0; i < n; i++) {
-			e = new Enemy();
-			objList.push_back(e);
-		}
-		background = new TexRect("assets/background1.png",-1,1,2,2);
-	}
 	~Game() {
 		for (unsigned i = 0; i < objList.size(); i++)
 			delete objList.at(i);
@@ -92,12 +79,22 @@ public:
 
 	// This sould work now	
 	void detectCollision(){
-		int i = 0;
+		int i = 1;
 		while(i < objList.size()){
 			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
 				std::cout << "HIT!!!" << std::endl;
 			}
 			i++;
+		}
+	}
+
+	void spawnEnemies(){
+		Enemy *e;
+		float x = .8;
+		for (int i = 0; i < 10; i++) {
+			float y = 1 - (.2 * i);
+			e = new Enemy(x, y);
+			objList.push_back(e);
 		}
 	}
 
