@@ -14,26 +14,26 @@ public:
 		
 		firerate = 5;
 		health = 20;
-		speed = 0.1;
+		speed = 0.01;
 	}
 	Enemy(int rate, int h) {
 		objectTex = new TexRect("assets/EnemyShip.png",.8, .1, .2, .2);
 		
 		firerate = rate;
 		health = h;
-		speed = 0.1;
+		speed = 0.01;
 	}
 	Enemy(float x, float y){
 		objectTex = new TexRect("assets/EnemyShip.png", x, y, .2, .2);
 		firerate = 5;
 		health = 20;
-		speed = 0.1;
+		speed = 0.01;
 	}
 
 	virtual ~Enemy() {}
 	
 	virtual void movePos(unsigned char key) {
-		int move = rand() % 4;							// int between 0 and 3
+		int move = 1;					// int between 0 and 3
 		switch (move) {
 			float x;
 			float y;
@@ -46,8 +46,11 @@ public:
 				break;
 			case 1:	//left
 				x = objectTex->getX();
-				if (x - speed >= -1) {
+				if (x - speed >= -1.21) {
 					objectTex->setX(x - speed);
+				}
+				else{
+					//Delete the Enemy
 				}
 				break;
 			case 2:	//down

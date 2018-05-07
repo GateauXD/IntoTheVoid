@@ -32,25 +32,25 @@ public:
 
 			case 'w':	//up
 				y = objectTex->getY();
-				if (y + speed <= 1) {
+				if (y + speed <= 1.02) {
 					objectTex->setY(y + speed);
 				}
 				break;
 			case 'a':	//left
 				x = objectTex->getX();
-				if (x - speed >= -1) {
+				if (x - speed >= -1.02) {
 					objectTex->setX(x - speed);
 				}
 				break;
 			case 's':	//down
 				y = objectTex->getY();
-				if (y - objectTex->getHeight() - speed >= -1) {
+				if (y - objectTex->getHeight() - speed >= -1.02) {
 					objectTex->setY(y - speed);
 				}
 				break;
 			case 'd':	//right
 				x = objectTex->getX();
-				if (x + objectTex->getWidth() + speed <= 1) {
+				if (x + objectTex->getWidth() + speed <= 1.02) {
 					objectTex->setX(x + speed);
 				}
 				break;
