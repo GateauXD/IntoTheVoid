@@ -8,6 +8,11 @@ void explode(int value){		//added the explode function
 	singleton->redraw();
 	glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
     }
+    if(!singleton->platform->done()){	//check if the animation has already been done
+	singleton->platform->advance();  //start advancing through explosion map
+	singleton->redraw();
+	glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
+    }
 }
 
 void app_timer(int value){
@@ -20,12 +25,15 @@ void app_timer(int value){
         float bx = singleton->ball->x + singleton->ball->w/2;
         float by = singleton->ball->y - singleton->ball->h + 0.1;
         if (singleton->platform->contains(bx, by)){
-            singleton->ball->rising = true;
+	    singleton->platform->animate();
+	    singleton->ball->animate();
+	    explode(0);
+            /*singleton->ball->rising = true;
             singleton->ball->yinc +=0.005;
             singleton->ball->xinc = singleton->ball->yinc;
             if (singleton->ball->yinc > 0.15){
                 singleton->ball->yinc = 0.15;
-            }
+            }*/
         }
         
         if (singleton->ball->y - singleton->ball->h < -0.99){
@@ -72,7 +80,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     background = new TexRect("images/back.png", -1, 1, 2, 2);
     ball = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, 0, 0.67, 0.2, 0.2);
 
-    platform = new TexRect("images/spaceship.pod_.1.red_.png", 0, -0.7, 0.2, 0.2);
+    platform = new TexRect("images/spaceship.pod_.1.red_.png", "images/exp2_0.png", 4, 4, 0, -0.7, 0.2, 0.2);
     
     gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
     up = down = left = right = false;
@@ -90,13 +98,13 @@ void App::specialKeyPress(int key){
             left = true;
         }
         if (key == 101){
-            //up = true;
+            up = true;
         }
         if (key == 102){
             right = true;
         }
         if (key == 103){
-            //down = true;
+            down = true;
         }
     }
 }
