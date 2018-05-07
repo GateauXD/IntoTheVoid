@@ -115,13 +115,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\AnimatedRect.cpp" />
     <ClCompile Include="..\App.cpp" />
     <ClCompile Include="..\app_main.cpp" />
     <ClCompile Include="..\GlutApp.cpp" />
+    <ClCompile Include="..\TexRect.cpp" />
+    <ClCompile Include="..\windows\image_DXT.c" />
+    <ClCompile Include="..\windows\image_helper.c" />
+    <ClCompile Include="..\windows\SOIL.c" />
+    <ClCompile Include="..\windows\stb_image_aug.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\AnimatedRect.h" />
     <ClInclude Include="..\App.h" />
     <ClInclude Include="..\GlutApp.h" />
+    <ClInclude Include="..\TexRect.h" />
+    <ClInclude Include="..\windows\image_DXT.h" />
+    <ClInclude Include="..\windows\image_helper.h" />
+    <ClInclude Include="..\windows\SOIL.h" />
+    <ClInclude Include="..\windows\stbi_DDS_aug.h" />
+    <ClInclude Include="..\windows\stbi_DDS_aug_c.h" />
+    <ClInclude Include="..\windows\stb_image_aug.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
