@@ -141,7 +141,11 @@ public:
 		while(i < objList.size()){
 			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
 				gameOver = true;
-				score->add(5);
+			}
+			if(projeList[i]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
+				objList[i]->explode();
+				objList[i]->delete;
+				score->add(100);
 			}
 			i++;
 		}
