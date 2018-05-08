@@ -139,7 +139,7 @@ public:
 	void detectCollision(){
 		int i = 1;
 		while(i < objList.size()){
-			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
+			if(objList[0]->checkCollision(*objList[i])){
 				gameOver = true;
 			}
 			/*if(projeList[i]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
