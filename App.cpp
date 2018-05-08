@@ -50,6 +50,10 @@ void App::mouseDrag(float x, float y){
     redraw();
 }
 
+void App::idle(){
+	redraw();
+}
+
 void App::keyPress(unsigned char key) {
     if (key == 27){
         // Exit the app when Esc key is pressed
