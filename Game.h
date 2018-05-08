@@ -11,6 +11,8 @@
 #include "TexRect.h" // for textures
 //#include "Projectile.h"
 #include "Powerup.h"
+#include "Score.h"
+#include "App.h"
 
 #if defined WIN32
 #include <freeglut.h>
@@ -20,10 +22,15 @@
 #include <GL/freeglut.h>
 #endif
 
-class Game {
+class Game{
 	TexRect* background;
 	//Powerup* test;
 	bool gameOver;
+	bool up;
+	bool down;
+	bool left;
+	bool right;
+
 	std::vector < Object* > objList;
 	Score* score;
 public:
@@ -46,10 +53,10 @@ public:
 	}
 
 	~Game() {
-		for (unsigned i = 0; i < objList.size(); i++)
+		for (unsigned i = 0; i < objList.size(); i++){
 			delete objList.at(i);
+		}
 		delete background;
-		//delete test;
 		delete score;
 	}
 	
@@ -57,8 +64,35 @@ public:
 	
 	void onClick(float mx, float my) {}
 
+<<<<<<< HEAD
 	void onPress(unsigned char key) {
 		specialKeyPress(key);
+=======
+	
+	void onPress(unsigned char key) {
+		if(!gameOver){
+			if(key == 'w' || key == 'W')
+				up = true;
+			if(key == 's' || key == 's')
+				down = true;
+			if(key == 'a' || key == 'A')
+				left = true;
+			if(key == 'd' || key == 'D')
+				right = true;
+		}
+	}
+
+	void specialKeyUp(unsigned char key){
+		std::cout << "Called";
+		if(key == 'w' || key == 'W')
+			up = false;
+		if(key == 's' || key == 's')
+			down = false;
+		if(key == 'a' || key == 'A')
+			left = false;
+		if(key == 'd' || key == 'D')
+			right = false;
+>>>>>>> f8fa0bee568115184baa1560f7ae648a773c6447
 	}
 
 	
@@ -93,7 +127,7 @@ public:
 		int i = 1;
 		while(i < objList.size()){
 			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
-				std::cout << "HIT!!!" << std::endl;
+				gameOver = true;
 				score->add(5);
 			}
 			i++;
@@ -110,6 +144,7 @@ public:
 		}
 	}
 
+<<<<<<< HEAD
 	void app_timer(int value){
 		if (gameOver){
 			game_over->advance();
@@ -202,6 +237,8 @@ public:
 			//std::cout << "x=" << x << ", y=" << y << ", w=" << w << ", h=" << h << std::endl;
 		//}
 	}
+=======
+>>>>>>> f8fa0bee568115184baa1560f7ae648a773c6447
 };
 
 #endif

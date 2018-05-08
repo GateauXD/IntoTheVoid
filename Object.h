@@ -17,7 +17,7 @@ public:
 	
 	virtual bool checkCollision(float x, float y); // virtual keyword added to allow for different child collision types (eg. circular)
 	virtual void getPosition(float &x, float &y);
-	//virtual void movePos(unsigned char key)=0; // may not need pure virtual (powerup), just want to style on 'em
+	virtual void movePos(unsigned char key)=0; // may not need pure virtual (powerup), just want to style on 'em
 	
 //hitbox
 	//virtual void getHB(float &x, float &y, float &w, float &h);

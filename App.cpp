@@ -23,7 +23,6 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 void App::draw() {
 	if (!game->isOver()) {
 		game->draw();
-		game->print();
 	}
 	else {
 		system("PAUSE");

@@ -26,15 +26,15 @@ public:
     Score(double x, double y){
         this->x = x;
         this->y = y;
-		score = 0;
-	}
+	score = 0;
+    }
 	
     float getX() const { return x; } 
     float getY() const { return y; }
     void setX(float x) { this->x = x; }
     void setY(float y) { this->y = y; }
 	
-	unsigned getScore() const { return score; }
+    unsigned getScore() const { return score; }
     std::string getScoreString() const { return std::to_string(score); }
 	
 	// call during(after?) collision to add points to score
