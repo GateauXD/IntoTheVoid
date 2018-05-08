@@ -30,13 +30,12 @@ class Game{
 	bool down;
 	bool left;
 	bool right;
+	bool moving;
 
 	std::vector < Object* > objList;
 	Score* score;
 public:
 	Game() {
-		init();
-		
 		gameOver = false;
 
 		Player *player = new Player();
@@ -64,22 +63,8 @@ public:
 	
 	void onClick(float mx, float my) {}
 
-<<<<<<< HEAD
 	void onPress(unsigned char key) {
 		specialKeyPress(key);
-=======
-	
-	void onPress(unsigned char key) {
-		if(!gameOver){
-			if(key == 'w' || key == 'W')
-				up = true;
-			if(key == 's' || key == 's')
-				down = true;
-			if(key == 'a' || key == 'A')
-				left = true;
-			if(key == 'd' || key == 'D')
-				right = true;
-		}
 	}
 
 	void specialKeyUp(unsigned char key){
@@ -92,7 +77,6 @@ public:
 			left = false;
 		if(key == 'd' || key == 'D')
 			right = false;
->>>>>>> f8fa0bee568115184baa1560f7ae648a773c6447
 	}
 
 	
@@ -144,56 +128,37 @@ public:
 		}
 	}
 
-<<<<<<< HEAD
 	void app_timer(int value){
 		if (gameOver){
-			game_over->advance();
-		}
-		
-		if (moving){
-			ball->jump();
-			float bx = ball->x + ball->w/2;
-			float by = ball->y - ball->h + 0.1;
-			if (platform->contains(bx, by)){
-			platform->animate();
-			ball->animate();
-			explode(0);
-			}
-			
-			if (ball->y - ball->h < -0.99){
-				moving = false;
-				game_over = true;
-				gameOver->animate();
-				
-			}
+			//game_over->advance();
 		}
 		if (up){
-			platform->moveUp(0.05);
+			objList[0]->objectTex->moveUp(0.05);
 		}
 		if (down){
-			platform->moveDown(0.05);
+			objList[0]->objectTex->moveDown(0.05);
 		}
 		if (left){
-			platform->moveLeft(0.05);
+			objList[0]->objectTex->moveLeft(0.05);
 		}
 		if (right){
-			platform->moveRight(0.05);
+			objList[0]->objectTex->moveRight(0.05);
 		}
 		
-		if (game_over){
-			redraw();
+		if (gameOver){
+			//redraw();
 			glutTimerFunc(100, app_timer, value);
 		}
 		else{
-			if (up || down || left || right || moving && !game_over){
-				redraw();
+			if (up || down || left || right || moving && !gameOver){
+				//redraw();
 				glutTimerFunc(16, app_timer, value);
 			}
 		}   
 	}
 
 	void specialKeyPress(int key){
-		if (!game_over){
+		if (!gameOver){
 			if (key == 100){
 				left = true;
 			}
@@ -223,10 +188,6 @@ public:
 			down = false;
 		}
 	}
-	
-	void idle(){
-
-	}
 
 //	DEBUG
 	void print() 
@@ -237,8 +198,6 @@ public:
 			//std::cout << "x=" << x << ", y=" << y << ", w=" << w << ", h=" << h << std::endl;
 		//}
 	}
-=======
->>>>>>> f8fa0bee568115184baa1560f7ae648a773c6447
 };
 
 #endif
