@@ -5,9 +5,10 @@ static App* singleton;
 
 void explode(int value){		//added the explode function 
     if(!singleton->ball->done()){	//check if the animation has already been done
-	singleton->ball->advance();  //start advancing through explosion map
-	singleton->redraw();
-	glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
+		singleton->ball->advance();  //start advancing through explosion map
+		singleton->redraw();
+		glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
+		score->add(10);
     }
     if(!singleton->platform->done()){	//check if the animation has already been done
 	singleton->platform->advance();  //start advancing through explosion map
@@ -61,7 +62,7 @@ void app_timer(int value){
             }*/
         }
         
-        if (singleton->ball->y - singleton->ball->h < -0.99){
+        if ( score->egtScore() > 100 ){
             singleton->moving = false;
             singleton->game_over = true;
             singleton->gameOver->animate();
@@ -114,6 +115,8 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     float xx = this->platform->getX();
     float ww = this->platform->getW();
     float hh = this->platform->getH();
+	
+	score = new Score( 0.7, 0.9 );
     
     /*TexRect *p;
     for (int i = 0; i < 10; i++){
@@ -168,6 +171,8 @@ void App::draw() {
     // Set background color to black
     glClearColor(0.0, 0.0, 1.0, 1.0);
     
+	score->draw(); 
+	
     // Set up the transformations stack
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -241,6 +246,7 @@ void App::keyPress(unsigned char key) {
         delete platform;
         delete gameOver;
         delete background;
+		delete score;
         delete this;
         
         exit(0);

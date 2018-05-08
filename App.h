@@ -35,6 +35,8 @@ public:
     std::vector< TexRect* > bullets;
     
     AnimatedRect* gameOver;
+	
+	Score* score;
     
     bool up;
     bool down;
