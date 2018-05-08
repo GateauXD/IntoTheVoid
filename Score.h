@@ -44,7 +44,7 @@ public:
 	
 	// call at beginning of drawing loop to put on top
 	void draw() {
-		glColor3d(1.0, 1.0, 0.0);
+		//glColor3d(1.0, 1.0, 0.0);
 		glRasterPos2f(x, y);
 		
 		std::string s = std::to_string(score);

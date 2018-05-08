@@ -7,6 +7,9 @@
 #include "Score.h"
 #include <vector>
 
+#include <stdlib.h>	//rand()
+#include <time.h>	//time()
+
 class App: public GlutApp {
     // Maintain app state here
     float mx;
@@ -27,7 +30,7 @@ public:
     
     void idle();
 	
-	void makeBall();
+    void makeBall(int n);
     
     std::vector< TexRect*> asteroids;
     
@@ -49,7 +52,7 @@ public:
     bool moving;
     bool game_over;
 
-    
+    time_t spawnTimer;
     
 };
 

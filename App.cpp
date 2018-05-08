@@ -1,8 +1,4 @@
 #include "App.h"
-#include <vector>
-
-#include <stdlib.h>	//rand()
-#include <time.h>	//time()
 
 static App* singleton;
 
@@ -50,12 +46,12 @@ void app_timer(int value){
                 }*/
             }
         
-            if ( singleton->score->getScore() > 50 ){
+            /*if ( singleton->score->getScore() > 40 ){
             	singleton->moving = false;
             	singleton->game_over = true;
             	singleton->gameOver->animate();
             
-            }
+            }*/
         }
     }
     if (singleton->up){
@@ -85,10 +81,14 @@ void app_timer(int value){
     
 }
 
-/*void App::makeBall() {
-	delete ball;
-	ball = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, 0, 0.67, 0.2, 0.2);
-}*/
+void App::makeBall(int n) {
+    TexRect *a;
+    for (int i = 0; i < n; i++){			
+	float x = ((float)(rand() % 200) / 100)-1;			
+	a = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, x, .8, 0.2, 0.2);
+	asteroids.push_back(a);
+    }
+}
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
@@ -115,16 +115,12 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	score = new Score( 0, 0 );
     
 	srand (time(NULL));
-    TexRect *a;
-    for (int i = 0; i < 5; i++){			
-	float x = ((float)(rand() % 200) / 100)-1;			
-	a = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, x, .8, 0.2, 0.2);
-	asteroids.push_back(a);
-    }
+	makeBall(5);
 
     moving = true;
     game_over = false;
     
+    time(&spawnTimer);
     app_timer(1);
 
 }
@@ -231,17 +227,25 @@ void App::idle(){
 		if (asteroids.at(i)->contains(bx, by)){
   	            asteroids.at(i)->animate();
 	            explodeAsteroid(0);
-            	score->add(10);
-				asteroids.erase(asteroids.begin() + i);
+            		score->add(10);
+			delete asteroids.at(i);
+			asteroids.erase(asteroids.begin() + i);
                 }
 
             }
 	}
 	else{
+	    delete bullets.at(i);
 	    bullets.erase(bullets.begin() + i);
 	}
       }	
     }
+	time_t newTime;
+	time(&newTime);
+	if (difftime(newTime, spawnTimer) > 3 || asteroids.size() < 3) {
+		makeBall(1);
+		spawnTimer = newTime;
+	}
 }
 
 void App::keyPress(unsigned char key) {
@@ -253,6 +257,8 @@ void App::keyPress(unsigned char key) {
         delete gameOver;
         delete background;
 		delete score;
+		//delete asteroids;
+		//delete bullets;
         delete this;
         
         exit(0);
