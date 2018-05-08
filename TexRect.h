@@ -43,9 +43,13 @@ public:
     bool shoot();
     bool done();
     bool shooting;
+    bool shot;
+    float getShot();
+    void setShot(bool);
     
     
     void moveUp(float rate=0.01);
+    void moveUpP(float rate=0.09);
     void moveDown(float rate=0.01);
     void moveLeft(float rate=0.01);
     void moveRight(float rate=0.01);

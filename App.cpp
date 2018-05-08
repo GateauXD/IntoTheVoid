@@ -1,4 +1,5 @@
 #include "App.h"
+#include <vector>
 
 static App* singleton;
 
@@ -13,6 +14,48 @@ void explode(int value){		//added the explode function
 	singleton->redraw();
 	glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
     }
+}
+
+void moveP(int value){
+    if (singleton->shooting){
+      for (unsigned i = 0; i < singleton->bullets.size(); i++){
+	/*if(!singleton->bullets.at(i)->getShot()){
+             singleton->bullets.at(i)->setShot(true);
+        }*/
+	if(singleton->bullets.at(i)->getY() < .99){
+	    singleton->bullets.at(i)->moveUpP(.09);
+	    singleton->redraw();
+      	    float bx = singleton->bullets.at(i)->x;
+            float by = singleton->bullets.at(i)->y;
+	    if (singleton->ball->contains(bx, by)){
+	        singleton->ball->animate();
+	        explode(0);
+            
+            }
+	    glutTimerFunc(32, moveP, value);
+	}
+      }	
+    }
+
+
+}
+//singleton->bullet->setX(singleton->platform->getX() + singleton->platform->getW()/2);
+//singleton->bullet->setY(singleton->platform->getY());
+void projectiles(int value){
+	if(singleton->shooting){
+	    for (unsigned i = 0; i < singleton->bullets.size(); i++){
+		if(!singleton->bullets.at(i)->getShot()){
+	            singleton->bullets.at(i)->setX(singleton->platform->getX() + singleton->platform->getW()/2);
+	            singleton->bullets.at(i)->setY(singleton->platform->getY());
+		}
+		
+	    }
+	    
+            //singleton->bullets.back()->setShot(true);
+            //moveP(1);
+	    glutTimerFunc(1, projectiles, value);
+	}
+
 }
 
 void app_timer(int value){
@@ -83,8 +126,19 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     platform = new TexRect("images/spaceship.pod_.1.red_.png", "images/exp2_0.png", 4, 4, 0, -0.7, 0.2, 0.2);
     
     gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
-    up = down = left = right = false;
+    shooting = up = down = left = right = false;
+   
+    float yy = this->platform->getY();
+    float xx = this->platform->getX();
+    float ww = this->platform->getW();
+    float hh = this->platform->getH();
     
+    /*TexRect *p;
+    for (int i = 0; i < 10; i++){
+	p = new TexRect("images/basicBullet.bmp", xx - ww/2, yy + hh, 0.025, 0.025);
+	bullets.push_back(p);
+    }*/
+
     moving = true;
     game_over = false;
     
@@ -138,8 +192,15 @@ void App::draw() {
     
     background->draw();
     platform->draw();
+    if(shooting){
+	for(unsigned i = 0; i < singleton->bullets.size(); i++){
+		bullets.at(i)->draw();
+	}
+        
+    }
     ball->draw();
     gameOver->draw();
+   
     
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
@@ -185,7 +246,7 @@ void App::keyPress(unsigned char key) {
         exit(0);
     }
     
-    if (key == ' '){
+    if (key == 13){
         ball->x = 0;
         ball->y = 0.67;
         ball->yinc = 0.01;
@@ -195,4 +256,15 @@ void App::keyPress(unsigned char key) {
         gameOver->stop();
         moving = true;
     }
+   
+     if( key == ' '){
+        
+	TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
+	
+	singleton->bullets.push_back(p);
+        shooting = true;
+        
+    }
+   // projectiles(1);
+    moveP(1);
 }

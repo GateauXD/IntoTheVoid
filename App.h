@@ -4,6 +4,7 @@
 #include "GlutApp.h"
 #include "TexRect.h"
 #include "AnimatedRect.h"
+#include <vector>
 
 class App: public GlutApp {
     // Maintain app state here
@@ -31,15 +32,18 @@ public:
     
     TexRect* background;
     
+    std::vector< TexRect* > bullets;
+    
     AnimatedRect* gameOver;
     
     bool up;
     bool down;
     bool left;
     bool right;
-    
+    bool shooting;
     bool moving;
     bool game_over;
+
     
     
 };
