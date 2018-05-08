@@ -110,7 +110,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     
     TexRect *a;
     for (int i = 0; i < 5; i++){			
-	float y = ((float)(rand() % 200) / 100)-1;			
+	float x = ((float)(rand() % 200) / 100)-1;			
 	a = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, x, .8, 0.2, 0.2);
 	asteroids.push_back(a);
     }
