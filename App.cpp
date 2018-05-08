@@ -3,47 +3,14 @@
 
 static App* singleton;
 
-<<<<<<< HEAD
-void explode(int value){
-    for(unsigned i = 0; i < singleton->asteroids.size(); i++){	//added the explode function 
-        if(!singleton->asteroids.at(i)->done()){	//check if the animation has already been done
-	    singleton->asteroids.at(i)->advance();  //start advancing through explosion map
-	    singleton->redraw();
-	    glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
-	    singleton->score->add(10);
-        }
-        if(!singleton->platform->done()){	//check if the animation has already been done
-	    singleton->platform->advance();  //start advancing through explosion map
-	    singleton->redraw();
-	    glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
-        }
-    }
-}
-
-void moveP(int value){
-    if (singleton->shooting){
-      for (unsigned i = 0; i < singleton->bullets.size(); i++){
-	
-	if(singleton->bullets.at(i)->getY() < .99){
-	    singleton->bullets.at(i)->moveUpP(.09);
-	    singleton->redraw();
-      	    float bx = singleton->bullets.at(i)->x;
-            float by = singleton->bullets.at(i)->y;
-	    if (singleton->asteroids.at(i)->contains(bx, by)){
-	        singleton->asteroids.at(i)->animate();
-	        explode(0);
-            //singleton->makeBall();
-           }
-	    glutTimerFunc(64, moveP, value);
-	}
-      }	
-=======
 void explodeAsteroid(int value){		//added the explode function 
-    if(!singleton->ball->done()){	//check if the animation has already been done
-		singleton->ball->advance();  //start advancing through explosion map
+for (unsigned i = 0; i < singleton->asteroids.size();i++){
+    if(!singleton->asteroids.at(i)->done()){	//check if the animation has already been done
+		singleton->asteroids.at(i)->advance();  //start advancing through explosion map
 		singleton->redraw();
 		glutTimerFunc(32, explodeAsteroid, value); //recursive timer function to keep advancing and redrawing the map 
     }
+}
 }
 
 void explodeShip(int value){
@@ -51,7 +18,6 @@ void explodeShip(int value){
 	singleton->platform->advance();  //start advancing through explosion map
 	singleton->redraw();
 	glutTimerFunc(32, explodeShip, value); //recursive timer function to keep advancing and redrawing the map 
->>>>>>> 911cfbf46a4a74bfa62272ac5fbfdab32a62b7e4
     }
 }
 
@@ -61,7 +27,7 @@ void app_timer(int value){
     }
     
     if (singleton->moving){
-<<<<<<< HEAD
+
 	for(unsigned i = 0; i < singleton->asteroids.size(); i++){
 	    singleton->asteroids.at(i)->jump();
             float bx = singleton->asteroids.at(i)->x + singleton->asteroids.at(i)->w/2;
@@ -69,7 +35,7 @@ void app_timer(int value){
             if (singleton->platform->contains(bx, by)){
 	        singleton->platform->animate();
 	        singleton->asteroids.at(i)->animate();
-	        explode(0);
+	        explodeShip(0);
                 /*singleton->ball->rising = true;
                 singleton->ball->yinc +=0.005;
                 singleton->ball->xinc = singleton->ball->yinc;
@@ -78,31 +44,13 @@ void app_timer(int value){
                 }*/
             }
         
-            if ( singleton->score->getScore() > 100 ){
-=======
-        singleton->ball->jump();
-        float bx = singleton->ball->x + singleton->ball->w/2;
-        float by = singleton->ball->y - singleton->ball->h + 0.1;
-        if (singleton->platform->contains(bx, by)){
-	    singleton->platform->animate();
-	    singleton->ball->animate();
-	    explodeShip(0);
-            /*singleton->ball->rising = true;
-            singleton->ball->yinc +=0.005;
-            singleton->ball->xinc = singleton->ball->yinc;
-            if (singleton->ball->yinc > 0.15){
-                singleton->ball->yinc = 0.15;
-            }*/
-        }
-        
-        if ( singleton->score->getScore() > 50 ){
->>>>>>> 911cfbf46a4a74bfa62272ac5fbfdab32a62b7e4
-            singleton->moving = false;
-            singleton->game_over = true;
-            singleton->gameOver->animate();
+            if ( singleton->score->getScore() > 50 ){
+            	singleton->moving = false;
+            	singleton->game_over = true;
+            	singleton->gameOver->animate();
             
+            }
         }
-      }
     }
     if (singleton->up){
         singleton->platform->moveUp(0.05);
@@ -267,7 +215,6 @@ void App::idle(){
      if (shooting){
       for (unsigned i = 0; i < bullets.size(); i++){
 	
-<<<<<<< HEAD
 	if(singleton->bullets.at(i)->getY() < .99){
 	    singleton->bullets.at(i)->moveUpP(.09);
 	    singleton->redraw();
@@ -276,19 +223,10 @@ void App::idle(){
 	    for(unsigned i = 0; i < singleton->asteroids.size(); i++){
 		if (singleton->asteroids.at(i)->contains(bx, by)){
   	            singleton->asteroids.at(i)->animate();
-	            explode(0);
+	            explodeAsteroid(0);
+            	    score->add(10);
                 }
-=======
-	if(bullets.at(i)->getY() < .99){
-	    bullets.at(i)->moveUpP(.09);
-	    redraw();
-      	    float bx = bullets.at(i)->x;
-            float by = bullets.at(i)->y;
-	    if (ball->contains(bx, by)){
-	        ball->animate();
-	        explodeAsteroid(0);
-            	score->add(10);
->>>>>>> 911cfbf46a4a74bfa62272ac5fbfdab32a62b7e4
+
             }
 	}
 	else{
