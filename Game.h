@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef Game_h
+#define Game_h
 
 #include <vector>
 #include <iostream>
@@ -12,7 +12,7 @@
 //#include "Projectile.h"
 #include "Powerup.h"
 #include "Score.h"
-#include "App.h"
+//#include "App.h"
 
 #if defined WIN32
 #include <freeglut.h>
@@ -36,8 +36,12 @@ class Game{
 	Score* score;
 public:
 	Game() {
+		std::cout<<"Creating Game.\n";
 		gameOver = false;
-
+		left=false;
+		right=false;
+		up=false;
+		down=false;
 		Player *player = new Player();
 		objList.push_back(player);
 		
@@ -47,8 +51,9 @@ public:
 		background =new TexRect("assets/background1.png",-1,1,2,2);
 		//test=new Powerup();
 		score = new Score( 0.7, 0.9 );
-		
-		app_timer(1);
+		std::cout<<"gameOver= "<<gameOver<<"\nleft= "<<left<<"\nright= "<<right<<"\nup= "<<up<<"\ndown= "<<down;
+		std::cout<<"\nDone Game.\n";
+		//app_timer(1);
 	}
 
 	~Game() {
@@ -59,7 +64,9 @@ public:
 		delete score;
 	}
 	
-	bool isOver() const { return gameOver; }
+	//bool isOver() const { 
+	//std::cout<<"Is over.\n";
+	//return gameOver; }
 	
 	void onClick(float mx, float my) {}
 
@@ -108,10 +115,10 @@ public:
 			right = false;
 	}
 */
-
 	
 	// Currently draws hitboxes and no background, eventually will draw Textures
 	void draw() {
+		std::cout<<"Drawing score.\n";
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -122,7 +129,7 @@ public:
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		for (unsigned i = 0; i < objList.size(); i++) {
+		for (unsigned i = 0; i < objList.size()-1; i++) {
 			objList.at(i)->objectTex->draw();
 		}
 
@@ -157,8 +164,18 @@ public:
 			objList.push_back(e);
 		}
 	}
-
-	void app_timer(int value);
+	
+	void end();
+	void moveUp();
+	void moveDown();
+	void moveLeft();
+	void moveRight();
+	bool getUp();
+	bool getDown();
+	bool getLeft();
+	bool getRight();
+	bool isMoving();
+	bool isOver();
 
 //	DEBUG
 	void print() 

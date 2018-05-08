@@ -1,23 +1,59 @@
 #include "App.h"
 
+static App* singleton;
+
 #include <iostream>
+
+void app_timer(int value){
+	std::cout<<"App timer.\n";
+	if (singleton->game->isOver()){
+		
+		//game_over->advance();
+		singleton->game->end();
+	}
+std::cout<<"App timer 1.\n";
+	 if (singleton->game->getUp()){
+		std::cout<<"App timer 2.\n";
+		//singleton->objList[0]->objectTex->moveUp(0.05);
+		singleton->game->moveUp();
+	}
+	 if (singleton->game->getDown()){
+		std::cout<<"App timer 3.\n";
+		//singleton->objList[0]->objectTex->moveDown(0.05);
+		singleton->game->moveDown();
+	}
+	 if (singleton->game->getLeft()){
+		std::cout<<"App timer 4.\n";
+		//singleton->objList[0]->objectTex->moveLeft(0.05);
+		singleton->game->moveLeft();
+	}
+	 if (singleton->game->getRight()){
+		std::cout<<"App timer 5.\n";
+		//singleton->objList[0]->objectTex->moveRight(0.05);
+		singleton->game->moveRight();
+	}
+	 if (singleton->game->isOver()){
+		std::cout<<"App timer 6.\n";
+		singleton->redraw();
+		glutTimerFunc(100, app_timer, value);
+	}
+	if ((singleton->game->getUp() || singleton->game->getDown() || singleton->game->getLeft() || singleton->game->getRight() || singleton->game->isMoving()) && (!singleton->game->isOver()) ){
+			std::cout<<"Drawing.\n";
+			singleton->draw();
+			glutTimerFunc(16, app_timer, value);
+		}
+	 
+}
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
+	std::cout<<"Creating App.\n";
     mx = 0.0;
     my = 0.0;
 
-//	DIFF MODE NEEDS WORK
-//
-//	int diff = 0;
-//	std::cout << "Enter difficulty [1, 10]" << std::endl;
-//	std::cin >> diff;
-//	if (diff) {
-//		game = new Game(diff);
-//	}
-//	else {
-		game = new Game();
-//	}
+	game = new Game();
+	app_timer(1);
+	std::cout<<"Done App.\n";
 }
 
 void App::draw() {
@@ -77,3 +113,5 @@ void App::keyPress(unsigned char key) {
 	// Redraw the scene
 	redraw();
 }
+
+
