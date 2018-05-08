@@ -10,21 +10,21 @@ class Enemy : public Ship {
 		
 public:
 	Enemy() {	
-		objectTex = new TexRect("assets/Roid.png",.8, .1, .2, .2);
+		objectTex = new TexRect("assets/Roid.png","assets/fireball.bmp",6,6,.8, .1, .2, .2);
 		
 		firerate = 5;
 		health = 20;
 		speed = 0.01;
 	}
 	Enemy(int rate, int h) {
-		objectTex = new TexRect("assets/Roid.png",.8, .1, .2, .2);
+		objectTex = new TexRect("assets/Roid.png","assets/fireball.bmp",6,6,.8, .1, .2, .2);
 		
 		firerate = rate;
 		health = h;
 		speed = 0.01;
 	}
 	Enemy(float x, float y){
-		objectTex = new TexRect("assets/Roid.png", x, y, .2, .2);
+		objectTex = new TexRect("assets/Roid.png","assets/fireball.bmp",6,6, x, y, .2, .2);
 		firerate = 5;
 		health = 20;
 		speed = 0.01;

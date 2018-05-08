@@ -9,13 +9,13 @@ class Player : public Ship {
 		
 public:
 	Player(){
-		objectTex = new TexRect("assets/PlayerShip.bmp",-1, .1, .2, .2);
+		objectTex = new TexRect("assets/PlayerShip.bmp","assets/fireball.bmp",6,6,-1, .1, .2, .2);
 		firerate = 5;
 		health = 20;
 		speed = 0.05;
 	}
 	Player(int rate, int h){
-		objectTex = new TexRect("assets/PlayerShip.bmp",-1, .1, .2, .2);
+		objectTex = new TexRect("assets/PlayerShip.bmp","assets/fireball.bmp",6,6,-1, .1, .2, .2);
 		firerate = rate;
 		health = h;
 		speed = 0.05;
