@@ -29,7 +29,7 @@ public:
 	
 	void makeBall();
     
-    TexRect* ball;
+    std::vector< TexRect*> asteroids;
     
     TexRect* platform;
     
