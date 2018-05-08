@@ -28,6 +28,8 @@ class Game {
 	Score* score;
 public:
 	Game() {
+		init();
+		
 		gameOver = false;
 
 		Player *player = new Player();
@@ -39,6 +41,8 @@ public:
 		background =new TexRect("assets/background1.png",-1,1,2,2);
 		//test=new Powerup();
 		score = new Score( 0.7, 0.9 );
+		
+		app_timer(1);
 	}
 
 	~Game() {
@@ -53,7 +57,9 @@ public:
 	
 	void onClick(float mx, float my) {}
 
-	void onPress(unsigned char key) {}
+	void onPress(unsigned char key) {
+		specialKeyPress(key);
+	}
 
 	
 	// Currently draws hitboxes and no background, eventually will draw Textures
@@ -102,6 +108,89 @@ public:
 			e = new Enemy(x, y);
 			objList.push_back(e);
 		}
+	}
+
+	void app_timer(int value){
+		if (gameOver){
+			game_over->advance();
+		}
+		
+		if (moving){
+			ball->jump();
+			float bx = ball->x + ball->w/2;
+			float by = ball->y - ball->h + 0.1;
+			if (platform->contains(bx, by)){
+			platform->animate();
+			ball->animate();
+			explode(0);
+			}
+			
+			if (ball->y - ball->h < -0.99){
+				moving = false;
+				game_over = true;
+				gameOver->animate();
+				
+			}
+		}
+		if (up){
+			platform->moveUp(0.05);
+		}
+		if (down){
+			platform->moveDown(0.05);
+		}
+		if (left){
+			platform->moveLeft(0.05);
+		}
+		if (right){
+			platform->moveRight(0.05);
+		}
+		
+		if (game_over){
+			redraw();
+			glutTimerFunc(100, app_timer, value);
+		}
+		else{
+			if (up || down || left || right || moving && !game_over){
+				redraw();
+				glutTimerFunc(16, app_timer, value);
+			}
+		}   
+	}
+
+	void specialKeyPress(int key){
+		if (!game_over){
+			if (key == 100){
+				left = true;
+			}
+			if (key == 101){
+				up = true;
+			}
+			if (key == 102){
+				right = true;
+			}
+			if (key == 103){
+				down = true;
+			}
+		}
+	}
+
+	void specialKeyUp(int key){
+		if (key == 100) {
+			left = false;
+		}
+		if (key == 101) {
+			up = false;
+		}
+		if (key == 102) {
+			right = false;
+		}
+		if (key == 103) {
+			down = false;
+		}
+	}
+	
+	void idle(){
+
 	}
 
 //	DEBUG
