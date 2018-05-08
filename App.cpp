@@ -8,7 +8,7 @@ void explode(int value){		//added the explode function
 		singleton->ball->advance();  //start advancing through explosion map
 		singleton->redraw();
 		glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
-		score->add(10);
+		singleton->score->add(10);
     }
     if(!singleton->platform->done()){	//check if the animation has already been done
 	singleton->platform->advance();  //start advancing through explosion map
@@ -29,7 +29,7 @@ void moveP(int value){
 	    if (singleton->ball->contains(bx, by)){
 	        singleton->ball->animate();
 	        explode(0);
-            makeBall();
+            singleton->makeBall();
            }
 	    glutTimerFunc(64, moveP, value);
 	}
@@ -62,7 +62,7 @@ void app_timer(int value){
             }*/
         }
         
-        if ( score->getScore() > 100 ){
+        if ( singleton->score->getScore() > 100 ){
             singleton->moving = false;
             singleton->game_over = true;
             singleton->gameOver->animate();
