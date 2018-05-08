@@ -19,10 +19,17 @@ public:
     float w;
     float h;
     GLuint texture_id;
+    int rows;
+    int cols;
+    int curr_row;
+    int curr_col;
+    bool animating;
+    bool complete;
 
 
     TexRect (const char*, float, float, float, float);
-    
+    TexRect (const char*, const char*, int, int, float, float, float, float);
+
     void draw();
     
     bool contains(float, float);
@@ -31,8 +38,13 @@ public:
     void moveDown(float rate=0.01);
     void moveLeft(float rate=0.01);
     void moveRight(float rate=0.01);
-    
+
     void jump();
+    void animate();
+    void advance();
+    void reset();
+    
+    //void jump();
     
     void getPosition(float x,float y);
     float getX() const;
@@ -45,7 +57,7 @@ public:
 
     bool rising;
     bool movingLeft;
-   
+
     float xinc;
     float yinc;
 };

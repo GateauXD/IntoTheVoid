@@ -1,5 +1,5 @@
-#ifndef Game_h
-#define Game_h
+#ifndef GAME_H
+#define GAME_H
 
 #include <vector>
 #include <iostream>
@@ -25,7 +25,7 @@
 class Game{
 	TexRect* background;
 	//Powerup* test;
-	bool gameover;
+	bool gameOver;
 	bool up;
 	bool down;
 	bool left;
@@ -36,12 +36,8 @@ class Game{
 	Score* score;
 public:
 	Game() {
-		//std::cout<<"Creating Game.\n";
-		gameover = false;
-		left=false;
-		right=false;
-		up=false;
-		down=false;
+		gameOver = false;
+
 		Player *player = new Player();
 		objList.push_back(player);
 		
@@ -51,8 +47,7 @@ public:
 		background =new TexRect("assets/background1.png",-1,1,2,2);
 		//test=new Powerup();
 		score = new Score( 0.7, 0.9 );
-		//std::cout<<"gameOver= "<<gameover<<"\nleft= "<<left<<"\nright= "<<right<<"\nup= "<<up<<"\ndown= "<<down;
-		//std::cout<<"\nDone Game.\n";
+		
 		//app_timer(1);
 	}
 
@@ -64,14 +59,12 @@ public:
 		delete score;
 	}
 	
-	//bool isOver() const { 
-	//std::cout<<"Is over.\n";
-	//return gameOver; }
+	bool isOver() const { return gameOver; }
 	
 	void onClick(float mx, float my) {}
 
 	void onPress(int key) {
-		if (!gameover){
+		if (!gameOver){
 			if (key == 100){
 				left = true;
 			}
@@ -118,7 +111,6 @@ public:
 	
 	// Currently draws hitboxes and no background, eventually will draw Textures
 	void draw() {
-		std::cout<<"Drawing score.\n";
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -129,7 +121,7 @@ public:
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		for (unsigned i = 0; i < objList.size()-1; i++) {
+		for (unsigned i = 0; i < objList.size(); i++) {
 			objList.at(i)->objectTex->draw();
 		}
 
@@ -148,9 +140,13 @@ public:
 		int i = 1;
 		while(i < objList.size()){
 			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
-				gameover = true;
-				score->add(5);
+				gameOver = true;
 			}
+			/*if(projeList[i]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
+				objList[i]->explode();
+				delete objList[i];
+				score->add(100);
+			}*/
 			i++;
 		}
 	}

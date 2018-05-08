@@ -13,7 +13,6 @@ public:
 	TexRect* getHB() const;
 	
 	virtual bool checkCollision(float x, float y); // virtual keyword added to allow for different child collision types (eg. circular)
-	virtual bool checkCollision(Object &obj);
 	virtual void getPosition(float &x, float &y);
 	virtual void movePos(unsigned char key)=0; // may not need pure virtual (powerup), just want to style on 'em
 	

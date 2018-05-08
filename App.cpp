@@ -11,7 +11,7 @@ void app_timer(int value){
 		//game_over->advance();
 		singleton->game->end();
 	}
-	std::cout<<"App timer.\n";
+	//std::cout<<"App timer.\n";
 	 if (singleton->game->getUp()){
 		//std::cout<<"App timer 2.\n";
 		//singleton->objList[0]->objectTex->moveUp(0.05);
