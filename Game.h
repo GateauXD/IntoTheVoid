@@ -63,10 +63,39 @@ public:
 	
 	void onClick(float mx, float my) {}
 
-	void onPress(unsigned char key) {
-		specialKeyPress(key);
+	void onPress(int key) {
+		if (!gameOver){
+			if (key == 100){
+				left = true;
+			}
+			if (key == 101){
+				up = true;
+			}
+			if (key == 102){
+				right = true;
+			}
+			if (key == 103){
+				down = true;
+			}
+		}
+	}
+	
+	void onLift(int key) {
+		if (key == 100) {
+			left = false;
+		}
+		if (key == 101) {
+			up = false;
+		}
+		if (key == 102) {
+			right = false;
+		}
+		if (key == 103) {
+			down = false;
+		}
 	}
 
+/*
 	void specialKeyUp(unsigned char key){
 		std::cout << "Called";
 		if(key == 'w' || key == 'W')
@@ -78,6 +107,7 @@ public:
 		if(key == 'd' || key == 'D')
 			right = false;
 	}
+*/
 
 	
 	// Currently draws hitboxes and no background, eventually will draw Textures
@@ -128,66 +158,7 @@ public:
 		}
 	}
 
-	void app_timer(int value){
-		if (gameOver){
-			//game_over->advance();
-		}
-		if (up){
-			objList[0]->objectTex->moveUp(0.05);
-		}
-		if (down){
-			objList[0]->objectTex->moveDown(0.05);
-		}
-		if (left){
-			objList[0]->objectTex->moveLeft(0.05);
-		}
-		if (right){
-			objList[0]->objectTex->moveRight(0.05);
-		}
-		
-		if (gameOver){
-			//redraw();
-			glutTimerFunc(100, app_timer, value);
-		}
-		else{
-			if (up || down || left || right || moving && !gameOver){
-				//redraw();
-				glutTimerFunc(16, app_timer, value);
-			}
-		}   
-	}
-
-	void specialKeyPress(int key){
-		if (!gameOver){
-			if (key == 100){
-				left = true;
-			}
-			if (key == 101){
-				up = true;
-			}
-			if (key == 102){
-				right = true;
-			}
-			if (key == 103){
-				down = true;
-			}
-		}
-	}
-
-	void specialKeyUp(int key){
-		if (key == 100) {
-			left = false;
-		}
-		if (key == 101) {
-			up = false;
-		}
-		if (key == 102) {
-			right = false;
-		}
-		if (key == 103) {
-			down = false;
-		}
-	}
+	void app_timer(int value);
 
 //	DEBUG
 	void print() 

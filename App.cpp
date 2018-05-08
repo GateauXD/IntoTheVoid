@@ -30,6 +30,20 @@ void App::draw() {
 	}
 }
 
+void App::specialKeyPress(int key){
+    game->onPress(key);
+	
+	// Redraw the scene
+    redraw();
+}
+
+void App::specialKeyUp(int key){
+    game->onLift(key);
+	
+	// Redraw the scene
+    redraw();
+}
+
 void App::mouseDown(float x, float y){
     // Update app state
     mx = x;
@@ -59,7 +73,6 @@ void App::keyPress(unsigned char key) {
         // Exit the app when Esc key is pressed
         exit(0);
     }
-	game->onPress(key);
 	
 	// Redraw the scene
 	redraw();
