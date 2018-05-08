@@ -29,6 +29,7 @@ TexRect::TexRect (const char* filename, float x=0, float y=0, float w=0.5, float
     rising = false;
     movingLeft = true;
     animating = false;
+    shot = false;
     
     xinc = 0.01;
     yinc = 0.01;
@@ -91,6 +92,7 @@ TexRect::TexRect (const char* filename, const char* filename2, int rows, int col
     curr_col = 1;// set the current column to 1
 
     animating = false;
+    shot = false;
     
     complete = false; // set the complete boolean for the done function to false
     rising = false;
@@ -120,6 +122,12 @@ float TexRect::getX(){
 }
 float TexRect::getW(){
     return w;
+}
+float TexRect::getShot(){
+    return shot;
+}
+void TexRect::setShot(bool s){
+    shot = s;
 }
 void TexRect::setY(float y){
     this->y = y;

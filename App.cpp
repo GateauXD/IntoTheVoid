@@ -1,4 +1,5 @@
 #include "App.h"
+#include <vector>
 
 static App* singleton;
 
@@ -17,18 +18,21 @@ void explode(int value){		//added the explode function
 
 void moveP(int value){
     if (singleton->shooting){
-	if(singleton->bullet->getY() < .99){
-	    singleton->bullet->moveUpP(.09);
+      for (unsigned i = 0; i < singleton->bullets.size(); i++){
+	
+	if(singleton->bullets.at(i)->getY() < .99){
+	    singleton->bullets.at(i)->moveUpP(.09);
 	    singleton->redraw();
-      	    float bx = singleton->bullet->x;
-            float by = singleton->bullet->y;
+      	    float bx = singleton->bullets.at(i)->x;
+            float by = singleton->bullets.at(i)->y;
 	    if (singleton->ball->contains(bx, by)){
 	        singleton->ball->animate();
 	        explode(0);
             
-        }
-	    glutTimerFunc(32, moveP, value);
+            }
+	    glutTimerFunc(64, moveP, value);
 	}
+      }	
     }
 
 
@@ -111,8 +115,12 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     float ww = this->platform->getW();
     float hh = this->platform->getH();
     
-    bullet = new TexRect("images/basicBullet.bmp", xx - ww/2, yy + hh, 0.025, 0.025);
-    
+    /*TexRect *p;
+    for (int i = 0; i < 10; i++){
+	p = new TexRect("images/basicBullet.bmp", xx - ww/2, yy + hh, 0.025, 0.025);
+	bullets.push_back(p);
+    }*/
+
     moving = true;
     game_over = false;
     
@@ -167,7 +175,10 @@ void App::draw() {
     background->draw();
     platform->draw();
     if(shooting){
-        bullet->draw();
+	for(unsigned i = 0; i < singleton->bullets.size(); i++){
+		bullets.at(i)->draw();
+	}
+        
     }
     ball->draw();
     gameOver->draw();
@@ -201,7 +212,25 @@ void App::mouseDrag(float x, float y){
 }
 
 void App::idle(){
-
+     if (singleton->shooting){
+      for (unsigned i = 0; i < singleton->bullets.size(); i++){
+	
+	if(singleton->bullets.at(i)->getY() < .99){
+	    singleton->bullets.at(i)->moveUpP(.09);
+	    singleton->redraw();
+      	    float bx = singleton->bullets.at(i)->x;
+            float by = singleton->bullets.at(i)->y;
+	    if (singleton->ball->contains(bx, by)){
+	        singleton->ball->animate();
+	        explode(0);
+            
+            }
+	}
+	else{
+	    singleton->bullets.pop_back();
+	}
+      }	
+    }
 }
 
 void App::keyPress(unsigned char key) {
@@ -229,9 +258,13 @@ void App::keyPress(unsigned char key) {
     }
    
      if( key == ' '){
-	singleton->bullet->setX(singleton->platform->getX() + singleton->platform->getW()/2);
-	singleton->bullet->setY(singleton->platform->getY());
-	shooting = true;
+        
+	TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
+	
+	singleton->bullets.push_back(p);
+        shooting = true;
+        
     }
-    moveP(1);
+   // projectiles(1);
+    // moveP(1);
 }
