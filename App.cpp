@@ -1,6 +1,9 @@
 #include "App.h"
 #include <vector>
 
+#include <stdlib.h>	//rand()
+#include <time.h>	//time()
+
 static App* singleton;
 
 void explodeAsteroid(int value){		//added the explode function 
@@ -111,6 +114,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	
 	score = new Score( 0, 0 );
     
+	srand (time(NULL));
     TexRect *a;
     for (int i = 0; i < 5; i++){			
 	float x = ((float)(rand() % 200) / 100)-1;			
