@@ -4,25 +4,7 @@ static App* singleton;
 
 #include <iostream>
 
-App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
-    // Initialize state variables
-    mx = 0.0;
-    my = 0.0;
-
-	game = new Game();
-}
-
-void App::draw() {
-	if (!game->isOver()) {
-		game->draw();
-	}
-	else {
-		system("PAUSE");
-		exit(0);
-	}
-}
-
-void App::app_timer(int value){
+void app_timer(int value){
 	if (singleton->game->isOver()){
 		//game_over->advance();
 		singleton->game->end();
@@ -54,6 +36,24 @@ void App::app_timer(int value){
 			glutTimerFunc(16, app_timer, value);
 		}
 	}   
+}
+
+App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
+    // Initialize state variables
+    mx = 0.0;
+    my = 0.0;
+
+	game = new Game();
+}
+
+void App::draw() {
+	if (!game->isOver()) {
+		game->draw();
+	}
+	else {
+		system("PAUSE");
+		exit(0);
+	}
 }
 
 void App::specialKeyPress(int key){
