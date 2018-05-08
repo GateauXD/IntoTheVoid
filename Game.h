@@ -108,7 +108,6 @@ public:
 			right = false;
 	}
 */
-
 	
 	// Currently draws hitboxes and no background, eventually will draw Textures
 	void draw() {
@@ -157,8 +156,6 @@ public:
 			objList.push_back(e);
 		}
 	}
-
-	void app_timer(int value);
 
 //	DEBUG
 	void print() 

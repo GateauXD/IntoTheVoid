@@ -25,6 +25,8 @@ public:
     void specialKeyUp(int key);
 	void specialKeyPress(int key);
     
+	void app_timer(int value);
+	
 	void idle();
 };
 

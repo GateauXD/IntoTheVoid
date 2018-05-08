@@ -1,5 +1,7 @@
 #include "App.h"
 
+static App* singleton;
+
 #include <iostream>
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
@@ -7,17 +9,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     mx = 0.0;
     my = 0.0;
 
-//	DIFF MODE NEEDS WORK
-//
-//	int diff = 0;
-//	std::cout << "Enter difficulty [1, 10]" << std::endl;
-//	std::cin >> diff;
-//	if (diff) {
-//		game = new Game(diff);
-//	}
-//	else {
-		game = new Game();
-//	}
+	game = new Game();
 }
 
 void App::draw() {
@@ -28,6 +20,35 @@ void App::draw() {
 		system("PAUSE");
 		exit(0);
 	}
+}
+
+void App::app_timer(int value){
+	if (singleton->gameOver){
+		//game_over->advance();
+	}
+	if (singleton->up){
+		singleton->objList[0]->objectTex->moveUp(0.05);
+	}
+	if (singleton->down){
+		singleton->objList[0]->objectTex->moveDown(0.05);
+	}
+	if (singleton->left){
+		singleton->objList[0]->objectTex->moveLeft(0.05);
+	}
+	if (singleton->right){
+		singleton->objList[0]->objectTex->moveRight(0.05);
+	}
+	
+	if (singleton->gameOver){
+		//redraw();
+		glutTimerFunc(100, app_timer, value);
+	}
+	else{
+		if (singleton->up || singleton->down || singleton->left || singleton->right || singleton->moving && !singleton->gameOver){
+			//redraw();
+			glutTimerFunc(16, app_timer, value);
+		}
+	}   
 }
 
 void App::specialKeyPress(int key){
