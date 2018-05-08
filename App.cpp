@@ -33,9 +33,12 @@ void app_timer(int value){
             float bx = singleton->asteroids.at(i)->x + singleton->asteroids.at(i)->w/2;
             float by = singleton->asteroids.at(i)->y - singleton->asteroids.at(i)->h + 0.1;
             if (singleton->platform->contains(bx, by)){
-	        singleton->platform->animate();
-	        singleton->asteroids.at(i)->animate();
-	        explodeShip(0);
+				singleton->platform->animate();
+				singleton->asteroids.at(i)->animate();
+				explodeShip(0);
+				singleton->moving = false;
+            	singleton->game_over = true;
+            	singleton->gameOver->animate();
                 /*singleton->ball->rising = true;
                 singleton->ball->yinc +=0.005;
                 singleton->ball->xinc = singleton->ball->yinc;
@@ -224,8 +227,8 @@ void App::idle(){
 		if (asteroids.at(i)->contains(bx, by)){
   	            asteroids.at(i)->animate();
 	            explodeAsteroid(0);
-            	    score->add(10);
-		    asteroids.erase(asteroids.begin() + i);
+            	score->add(10);
+				asteroids.erase(asteroids.begin() + i);
                 }
 
             }
