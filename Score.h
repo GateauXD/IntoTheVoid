@@ -49,7 +49,8 @@ public:
 		
 		std::string s = std::to_string(score);
 		const char* c = s.c_str();
-		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)c );
+		glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)c );
+
 	}
 };
 

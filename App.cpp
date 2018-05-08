@@ -3,6 +3,7 @@
 
 static App* singleton;
 
+<<<<<<< HEAD
 void explode(int value){
     for(unsigned i = 0; i < singleton->asteroids.size(); i++){	//added the explode function 
         if(!singleton->asteroids.at(i)->done()){	//check if the animation has already been done
@@ -36,12 +37,23 @@ void moveP(int value){
 	    glutTimerFunc(64, moveP, value);
 	}
       }	
+=======
+void explodeAsteroid(int value){		//added the explode function 
+    if(!singleton->ball->done()){	//check if the animation has already been done
+		singleton->ball->advance();  //start advancing through explosion map
+		singleton->redraw();
+		glutTimerFunc(32, explodeAsteroid, value); //recursive timer function to keep advancing and redrawing the map 
     }
-
-
 }
 
-
+void explodeShip(int value){
+    if(!singleton->platform->done()){	//check if the animation has already been done
+	singleton->platform->advance();  //start advancing through explosion map
+	singleton->redraw();
+	glutTimerFunc(32, explodeShip, value); //recursive timer function to keep advancing and redrawing the map 
+>>>>>>> 911cfbf46a4a74bfa62272ac5fbfdab32a62b7e4
+    }
+}
 
 void app_timer(int value){
     if (singleton->game_over){
@@ -49,6 +61,7 @@ void app_timer(int value){
     }
     
     if (singleton->moving){
+<<<<<<< HEAD
 	for(unsigned i = 0; i < singleton->asteroids.size(); i++){
 	    singleton->asteroids.at(i)->jump();
             float bx = singleton->asteroids.at(i)->x + singleton->asteroids.at(i)->w/2;
@@ -66,6 +79,24 @@ void app_timer(int value){
             }
         
             if ( singleton->score->getScore() > 100 ){
+=======
+        singleton->ball->jump();
+        float bx = singleton->ball->x + singleton->ball->w/2;
+        float by = singleton->ball->y - singleton->ball->h + 0.1;
+        if (singleton->platform->contains(bx, by)){
+	    singleton->platform->animate();
+	    singleton->ball->animate();
+	    explodeShip(0);
+            /*singleton->ball->rising = true;
+            singleton->ball->yinc +=0.005;
+            singleton->ball->xinc = singleton->ball->yinc;
+            if (singleton->ball->yinc > 0.15){
+                singleton->ball->yinc = 0.15;
+            }*/
+        }
+        
+        if ( singleton->score->getScore() > 50 ){
+>>>>>>> 911cfbf46a4a74bfa62272ac5fbfdab32a62b7e4
             singleton->moving = false;
             singleton->game_over = true;
             singleton->gameOver->animate();
@@ -127,7 +158,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     float ww = this->platform->getW();
     float hh = this->platform->getH();
 	
-	score = new Score( 0.7, 0.9 );
+	score = new Score( 0, 0 );
     
     TexRect *a;
     for (int i = 0; i < 5; i++){			
@@ -183,7 +214,7 @@ void App::draw() {
     // Set background color to black
     glClearColor(0.0, 0.0, 1.0, 1.0);
     
-	score->draw(); 
+    score->draw(); 
 	
     // Set up the transformations stack
     glMatrixMode(GL_MODELVIEW);
@@ -192,7 +223,7 @@ void App::draw() {
     background->draw();
     platform->draw();
     if(shooting){
-	for(unsigned i = 0; i < singleton->bullets.size(); i++){
+	for(unsigned i = 0; i < bullets.size(); i++){
 		bullets.at(i)->draw();
 	}
         
@@ -225,16 +256,18 @@ void App::mouseDrag(float x, float y){
      /*if(ball->contains(mx, my)){		//added if statement to check if the image has been clicked
 	if(!ball->done()){
 	    ball->animate();	//changes animating boolean to true
-	    explode(0);	                //starts the advance and redraw recursive function to cycle through map
+	    explodeAsteroid(0);	                //starts the advance and redraw recursive function to cycle through map
+	    score->add(10);
 	}
     }*/
 
 }
 
 void App::idle(){
-     if (singleton->shooting){
-      for (unsigned i = 0; i < singleton->bullets.size(); i++){
+     if (shooting){
+      for (unsigned i = 0; i < bullets.size(); i++){
 	
+<<<<<<< HEAD
 	if(singleton->bullets.at(i)->getY() < .99){
 	    singleton->bullets.at(i)->moveUpP(.09);
 	    singleton->redraw();
@@ -245,10 +278,21 @@ void App::idle(){
   	            singleton->asteroids.at(i)->animate();
 	            explode(0);
                 }
+=======
+	if(bullets.at(i)->getY() < .99){
+	    bullets.at(i)->moveUpP(.09);
+	    redraw();
+      	    float bx = bullets.at(i)->x;
+            float by = bullets.at(i)->y;
+	    if (ball->contains(bx, by)){
+	        ball->animate();
+	        explodeAsteroid(0);
+            	score->add(10);
+>>>>>>> 911cfbf46a4a74bfa62272ac5fbfdab32a62b7e4
             }
 	}
 	else{
-	    singleton->bullets.pop_back();
+	    bullets.pop_back();
 	}
       }	
     }
@@ -280,12 +324,12 @@ void App::keyPress(unsigned char key) {
     }
    
      if( key == ' '){
-        
-	TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
+        if (!game_over) {
+		TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
 	
-	singleton->bullets.push_back(p);
-        shooting = true;
-        
+		singleton->bullets.push_back(p);
+		shooting = true;
+        }
     }
    // projectiles(1);
     // moveP(1);
