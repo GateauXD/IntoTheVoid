@@ -50,8 +50,7 @@ public:
 		std::string s = std::to_string(score);
 		const char* c = s.c_str();
 		glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)c );
-		
-		glClearColor(0.0, 0.0, 1.0, 1.0);
+
 	}
 };
 

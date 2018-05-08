@@ -3,41 +3,21 @@
 
 static App* singleton;
 
-void explode(int value){		//added the explode function 
+void explodeAsteroid(int value){		//added the explode function 
     if(!singleton->ball->done()){	//check if the animation has already been done
 		singleton->ball->advance();  //start advancing through explosion map
 		singleton->redraw();
-		glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
-		singleton->score->add(10);
+		glutTimerFunc(32, explodeAsteroid, value); //recursive timer function to keep advancing and redrawing the map 
     }
+}
+
+void explodeShip(int value){
     if(!singleton->platform->done()){	//check if the animation has already been done
 	singleton->platform->advance();  //start advancing through explosion map
 	singleton->redraw();
-	glutTimerFunc(32, explode, value); //recursive timer function to keep advancing and redrawing the map 
+	glutTimerFunc(32, explodeShip, value); //recursive timer function to keep advancing and redrawing the map 
     }
 }
-
-void moveP(int value){
-    if (singleton->shooting){
-      for (unsigned i = 0; i < singleton->bullets.size(); i++){
-
-	if(singleton->bullets.at(i)->getY() < .99){
-	    singleton->bullets.at(i)->moveUpP(.09);
-	    singleton->redraw();
-      	    float bx = singleton->bullets.at(i)->x;
-	    float by = singleton->bullets.at(i)->y;
-	    if (singleton->ball->contains(bx, by)){
-		singleton->ball->animate();
-		explode(0);
-	    singleton->makeBall();
-	   }
-	    glutTimerFunc(64, moveP, value);
-	}
-      }	
-    }
-}
-
-
 
 void app_timer(int value){
     if (singleton->game_over){
@@ -51,7 +31,7 @@ void app_timer(int value){
         if (singleton->platform->contains(bx, by)){
 	    singleton->platform->animate();
 	    singleton->ball->animate();
-	    explode(0);
+	    explodeShip(0);
             /*singleton->ball->rising = true;
             singleton->ball->yinc +=0.005;
             singleton->ball->xinc = singleton->ball->yinc;
@@ -60,7 +40,7 @@ void app_timer(int value){
             }*/
         }
         
-        if ( singleton->score->getScore() > 100 ){
+        if ( singleton->score->getScore() > 50 ){
             singleton->moving = false;
             singleton->game_over = true;
             singleton->gameOver->animate();
@@ -119,7 +99,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     float ww = this->platform->getW();
     float hh = this->platform->getH();
 	
-	score = new Score( 0.7, 0.9 );
+	score = new Score( 0, 0 );
     
     /*TexRect *p;
     for (int i = 0; i < 10; i++){
@@ -213,7 +193,8 @@ void App::mouseDrag(float x, float y){
      if(ball->contains(mx, my)){		//added if statement to check if the image has been clicked
 	if(!ball->done()){
 	    ball->animate();	//changes animating boolean to true
-	    explode(0);	                //starts the advance and redraw recursive function to cycle through map
+	    explodeAsteroid(0);	                //starts the advance and redraw recursive function to cycle through map
+	    score->add(10);
 	}
     }
 
@@ -230,8 +211,8 @@ void App::idle(){
             float by = bullets.at(i)->y;
 	    if (ball->contains(bx, by)){
 	        ball->animate();
-	        explode(0);
-            
+	        explodeAsteroid(0);
+            	score->add(10);
             }
 	}
 	else{
