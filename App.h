@@ -31,10 +31,11 @@ public:
     void idle();
 	
     void makeBall(int n);
-    
+    void makePowerup(int n);
     std::vector< TexRect*> asteroids;
-    
+    std::vector< TexRect*> powerUp;
     TexRect* platform;
+	//TexRect* pow;
     
     TexRect* background;
     

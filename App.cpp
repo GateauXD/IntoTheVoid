@@ -45,15 +45,21 @@ void app_timer(int value){
                     singleton->ball->yinc = 0.15;
                 }*/
             }
-        
-            /*if ( singleton->score->getScore() > 40 ){
-            	singleton->moving = false;
-            	singleton->game_over = true;
-            	singleton->gameOver->animate();
-            
-            }*/
+	}
+
+	
+
+	for(unsigned i = 0; i < singleton->Powerup.size(); i++){
+	    singleton->Powerup.at(i)->jump();
+	    float bx = singleton->Powerup.at(i)->x + singleton->Powerup.at(i)->w/2;
+	    float by = singleton->Powerup.at(i)->y - singleton->Powerup.at(i)->h + 0.1;
+	    if (singleton->platform->contains(bx, by)){
+		score->add(50);
+		delete singleton->Powerup.at(i);
+		singleton->Powerup.erase(singleton->Powerup.begin() + i);
+	    }
         }
-    }
+    
     if (singleton->up){
         singleton->platform->moveUp(0.05);
     }
@@ -90,6 +96,16 @@ void App::makeBall(int n) {
     }
 }
 
+void App::makePowerup(int n) {
+    TexRect *a;
+    for (int i = 0; i < n; i++){			
+	float x = ((float)(rand() % 200) / 100)-1;
+	float y = ((float)(rand() % 200) / 100)-1;			
+	a = new TexRect("images/mushroom.png", "images/exp2_0.png", 4, 4, x, y, 0.2, 0.2);
+	powerUp.push_back(a);
+    }
+}
+
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
     
@@ -103,7 +119,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     //ball = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, 0, 0.67, 0.2, 0.2);
 
     platform = new TexRect("images/spaceship.pod_.1.red_.png", "images/exp2_0.png", 4, 4, 0, -0.7, 0.2, 0.2);
-    
+    //pow = new TexRect("images/mushroom.png" ,0, 0,.2,.2);
     gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
     shooting = up = down = left = right = false;
    
@@ -112,7 +128,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     float ww = this->platform->getW();
     float hh = this->platform->getH();
 	
-	score = new Score( 0, 0 );
+	score = new Score( 0.7, 0.9 );
     
 	srand (time(NULL));
 	makeBall(5);
@@ -165,14 +181,16 @@ void App::draw() {
     // Set background color to black
     glClearColor(0.0, 0.0, 1.0, 1.0);
     
-    score->draw(); 
+    //score->draw(); 
 	
     // Set up the transformations stack
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
+    pow->draw();
     background->draw();
     platform->draw();
+	pow->draw();
+	score->draw(); 
     if(shooting){
 	for(unsigned i = 0; i < bullets.size(); i++){
 		bullets.at(i)->draw();
@@ -245,6 +263,7 @@ void App::idle(){
 	if (difftime(newTime, spawnTimer) > 3 || asteroids.size() < 3) {
 		makeBall(1);
 		spawnTimer = newTime;
+		makePowerup(1);
 	}
 }
 
@@ -257,6 +276,7 @@ void App::keyPress(unsigned char key) {
         delete gameOver;
         delete background;
 		delete score;
+	delete pow;
 		//delete asteroids;
 		//delete bullets;
         delete this;
