@@ -25,27 +25,32 @@ void App::draw() {
 void App::app_timer(int value){
 	if (singleton->gameOver){
 		//game_over->advance();
+		singleton->game->gameOver();
 	}
 	if (singleton->up){
-		singleton->objList[0]->objectTex->moveUp(0.05);
+		//singleton->objList[0]->objectTex->moveUp(0.05);
+		singleton->game->moveUp();
 	}
 	if (singleton->down){
-		singleton->objList[0]->objectTex->moveDown(0.05);
+		//singleton->objList[0]->objectTex->moveDown(0.05);
+		singleton->game->moveDown();
 	}
 	if (singleton->left){
-		singleton->objList[0]->objectTex->moveLeft(0.05);
+		//singleton->objList[0]->objectTex->moveLeft(0.05);
+		singleton->game->moveLeft();
 	}
 	if (singleton->right){
-		singleton->objList[0]->objectTex->moveRight(0.05);
+		//singleton->objList[0]->objectTex->moveRight(0.05);
+		singleton->game->moveRight();
 	}
 	
 	if (singleton->gameOver){
-		//redraw();
+		singleton->redraw();
 		glutTimerFunc(100, app_timer, value);
 	}
 	else{
-		if (singleton->up || singleton->down || singleton->left || singleton->right || singleton->moving && !singleton->gameOver){
-			//redraw();
+		if (singleton->game->getUp() || singleton->game->getDown() || singleton->game->getLeft() || singleton->game->getRight() || singleton->game->isMoving() && !singleton->game->isOver() ){
+			singleton->redraw();
 			glutTimerFunc(16, app_timer, value);
 		}
 	}   

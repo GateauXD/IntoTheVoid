@@ -156,6 +156,16 @@ public:
 			objList.push_back(e);
 		}
 	}
+	
+	void gameOver();
+	void moveUp();
+	void moveDown();
+	void moveLeft();
+	void moveRight();
+	bool getUp();
+	bool getDown();
+	bool getLeft();
+	bool getRight();
 
 //	DEBUG
 	void print() 
