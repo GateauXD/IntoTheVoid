@@ -22,7 +22,9 @@ public:
     void keyPress(unsigned char key);
     void mouseDown(float x, float y);
     void mouseDrag(float x, float y);
-	
+    void specialKeyUp(int key);
+	void specialKeyPress(int key);
+    
 	void idle();
 };
 
