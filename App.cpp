@@ -29,8 +29,8 @@ void moveP(int value){
 	    if (singleton->ball->contains(bx, by)){
 	        singleton->ball->animate();
 	        explode(0);
-            
-            }
+            makeBall();
+           }
 	    glutTimerFunc(64, moveP, value);
 	}
       }	
@@ -62,7 +62,7 @@ void app_timer(int value){
             }*/
         }
         
-        if ( score->egtScore() > 100 ){
+        if ( score->getScore() > 100 ){
             singleton->moving = false;
             singleton->game_over = true;
             singleton->gameOver->animate();
@@ -94,6 +94,11 @@ void app_timer(int value){
     }
     
     
+}
+
+void App::makeBall() {
+	delete ball;
+	ball = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, 0, 0.67, 0.2, 0.2);
 }
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
