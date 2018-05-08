@@ -17,6 +17,7 @@ public:
 	//When you collect a "powerup" it will add to your speed
 	void setFirerate(int n) { firerate += n; }
 	void setHealth(int n) { health = n; }
+	void takeHit(int hit) { health -= hit; }
 };
 
 #endif
