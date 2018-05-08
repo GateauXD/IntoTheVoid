@@ -25,6 +25,8 @@ public:
     void specialKeyUp(int key);
     
     void idle();
+	
+	void makeBall();
     
     TexRect* ball;
     
