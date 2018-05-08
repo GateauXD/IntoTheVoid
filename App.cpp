@@ -215,22 +215,23 @@ void App::idle(){
      if (shooting){
       for (unsigned i = 0; i < bullets.size(); i++){
 	
-	if(singleton->bullets.at(i)->getY() < .99){
-	    singleton->bullets.at(i)->moveUpP(.09);
-	    singleton->redraw();
-      	    float bx = singleton->bullets.at(i)->x;
-            float by = singleton->bullets.at(i)->y;
-	    for(unsigned i = 0; i < singleton->asteroids.size(); i++){
-		if (singleton->asteroids.at(i)->contains(bx, by)){
-  	            singleton->asteroids.at(i)->animate();
+	if(bullets.at(i)->getY() < .99){
+	    bullets.at(i)->moveUpP(.09);
+	    redraw();
+      	    float bx = bullets.at(i)->x;
+            float by = bullets.at(i)->y;
+	    for(unsigned i = 0; i < asteroids.size(); i++){
+		if (asteroids.at(i)->contains(bx, by)){
+  	            asteroids.at(i)->animate();
 	            explodeAsteroid(0);
             	    score->add(10);
+		    asteroids.erase(asteroids.begin() + i);
                 }
 
             }
 	}
 	else{
-	    bullets.pop_back();
+	    bullets.erase(bullets.begin() + i);
 	}
       }	
     }
@@ -263,9 +264,9 @@ void App::keyPress(unsigned char key) {
    
      if( key == ' '){
         if (!game_over) {
-		TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
+		TexRect *p = new TexRect("images/basicBullet.bmp", platform->getX() + platform->getW()/2, platform->getY(), 0.025, 0.025);
 	
-		singleton->bullets.push_back(p);
+		bullets.push_back(p);
 		shooting = true;
         }
     }
