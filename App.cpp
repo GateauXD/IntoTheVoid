@@ -23,9 +23,9 @@ void App::draw() {
 }
 
 void App::app_timer(int value){
-	if (singleton->gameOver){
+	if (singleton->game->isOver() ){
 		//game_over->advance();
-		singleton->game->gameOver();
+		singleton->game->end();
 	}
 	if (singleton->up){
 		//singleton->objList[0]->objectTex->moveUp(0.05);

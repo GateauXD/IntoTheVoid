@@ -1,6 +1,6 @@
 #include "Game.h"
 
-void Game::gameOver() {
+void Game::end() {
 	
 }
 void Game::moveUp() {

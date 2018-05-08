@@ -157,7 +157,7 @@ public:
 		}
 	}
 	
-	void gameOver();
+	void end();
 	void moveUp();
 	void moveDown();
 	void moveLeft();
@@ -166,6 +166,8 @@ public:
 	bool getDown();
 	bool getLeft();
 	bool getRight();
+	bool isMoving();
+	bool isOver();
 
 //	DEBUG
 	void print() 
