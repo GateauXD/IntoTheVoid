@@ -25,7 +25,7 @@
 class Game{
 	TexRect* background;
 	//Powerup* test;
-	bool gameOver;
+	bool gameover;
 	bool up;
 	bool down;
 	bool left;
@@ -36,8 +36,8 @@ class Game{
 	Score* score;
 public:
 	Game() {
-		std::cout<<"Creating Game.\n";
-		gameOver = false;
+		//std::cout<<"Creating Game.\n";
+		gameover = false;
 		left=false;
 		right=false;
 		up=false;
@@ -51,8 +51,8 @@ public:
 		background =new TexRect("assets/background1.png",-1,1,2,2);
 		//test=new Powerup();
 		score = new Score( 0.7, 0.9 );
-		std::cout<<"gameOver= "<<gameOver<<"\nleft= "<<left<<"\nright= "<<right<<"\nup= "<<up<<"\ndown= "<<down;
-		std::cout<<"\nDone Game.\n";
+		//std::cout<<"gameOver= "<<gameover<<"\nleft= "<<left<<"\nright= "<<right<<"\nup= "<<up<<"\ndown= "<<down;
+		//std::cout<<"\nDone Game.\n";
 		//app_timer(1);
 	}
 
@@ -71,7 +71,7 @@ public:
 	void onClick(float mx, float my) {}
 
 	void onPress(int key) {
-		if (!gameOver){
+		if (!gameover){
 			if (key == 100){
 				left = true;
 			}
@@ -148,7 +148,7 @@ public:
 		int i = 1;
 		while(i < objList.size()){
 			if(objList[0]->checkCollision(objList[i]->objectTex->getX(), objList[i]->objectTex->getY())){
-				gameOver = true;
+				gameover = true;
 				score->add(5);
 			}
 			i++;

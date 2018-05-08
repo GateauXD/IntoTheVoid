@@ -5,55 +5,62 @@ static App* singleton;
 #include <iostream>
 
 void app_timer(int value){
-	std::cout<<"App timer.\n";
-	if (singleton->game->isOver()){
+	//std::cout<<"App timer.\n ";
+	if (singleton->game->isOver()==true){
 		
 		//game_over->advance();
 		singleton->game->end();
 	}
-std::cout<<"App timer 1.\n";
+	std::cout<<"App timer.\n";
 	 if (singleton->game->getUp()){
-		std::cout<<"App timer 2.\n";
+		//std::cout<<"App timer 2.\n";
 		//singleton->objList[0]->objectTex->moveUp(0.05);
 		singleton->game->moveUp();
 	}
+	//std::cout<<"App timer.\n";
 	 if (singleton->game->getDown()){
-		std::cout<<"App timer 3.\n";
+		//std::cout<<"App timer 3.\n";
 		//singleton->objList[0]->objectTex->moveDown(0.05);
 		singleton->game->moveDown();
 	}
+	//std::cout<<"App timer.\n";
 	 if (singleton->game->getLeft()){
-		std::cout<<"App timer 4.\n";
+		//std::cout<<"App timer 4.\n";
 		//singleton->objList[0]->objectTex->moveLeft(0.05);
 		singleton->game->moveLeft();
 	}
+	//std::cout<<"App timer.\n";
 	 if (singleton->game->getRight()){
-		std::cout<<"App timer 5.\n";
+		//std::cout<<"App timer 5.\n";
 		//singleton->objList[0]->objectTex->moveRight(0.05);
 		singleton->game->moveRight();
 	}
+	//std::cout<<"App timer.\n";
 	 if (singleton->game->isOver()){
-		std::cout<<"App timer 6.\n";
+		//std::cout<<"App timer 6.\n";
 		singleton->redraw();
 		glutTimerFunc(100, app_timer, value);
 	}
+	//std::cout<<"App timer.\n";
 	if ((singleton->game->getUp() || singleton->game->getDown() || singleton->game->getLeft() || singleton->game->getRight() || singleton->game->isMoving()) && (!singleton->game->isOver()) ){
-			std::cout<<"Drawing.\n";
+			//std::cout<<"Drawing.\n";
 			singleton->draw();
 			glutTimerFunc(16, app_timer, value);
 		}
+	//std::cout<<"App timer.\n";
 	 
 }
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
-	std::cout<<"Creating App.\n";
+	//std::cout<<"Creating App.\n";
     mx = 0.0;
     my = 0.0;
 
 	game = new Game();
+	singleton=this;
 	app_timer(1);
-	std::cout<<"Done App.\n";
+	//std::cout<<"Done App.\n";
 }
 
 void App::draw() {

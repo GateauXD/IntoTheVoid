@@ -1,7 +1,7 @@
 #include "Game.h"
 
 void Game::end() {
-	std::cout<<"Game end.\n";
+	//std::cout<<"Game end.\n";
 }
 void Game::moveUp() {
 	objList[0]->objectTex->moveUp(0.05);
@@ -33,5 +33,5 @@ bool Game::isMoving(){
 	return moving;
 }
 bool Game::isOver(){
-	return gameOver;
+	return gameover;
 }
