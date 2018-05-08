@@ -5,10 +5,9 @@
 //#include "Circle.h"
 
 class Object {
-    TexRect* objectTex;
-    float speed;
-
 public:
+	TexRect* objectTex;
+    float speed;
 	
 	float getSpeed() const;
 	TexRect* getHB() const;
