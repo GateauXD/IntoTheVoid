@@ -5,15 +5,13 @@
 //#include "Circle.h"
 
 class Object {
-	
-public:
     TexRect* objectTex;
     float speed;
 
 public:
 	
 	float getSpeed() const;
-	
+	TexRect* getHB() const;
 	
 	virtual bool checkCollision(float x, float y); // virtual keyword added to allow for different child collision types (eg. circular)
 	virtual void getPosition(float &x, float &y);
