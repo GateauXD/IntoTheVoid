@@ -23,28 +23,28 @@ void App::draw() {
 }
 
 void App::app_timer(int value){
-	if (singleton->game->isOver() ){
+	if (singleton->game->isOver()){
 		//game_over->advance();
 		singleton->game->end();
 	}
-	if (singleton->up){
+	if (singleton->game->getUp()){
 		//singleton->objList[0]->objectTex->moveUp(0.05);
 		singleton->game->moveUp();
 	}
-	if (singleton->down){
+	if (singleton->game->getDown()){
 		//singleton->objList[0]->objectTex->moveDown(0.05);
 		singleton->game->moveDown();
 	}
-	if (singleton->left){
+	if (singleton->game->getLeft()){
 		//singleton->objList[0]->objectTex->moveLeft(0.05);
 		singleton->game->moveLeft();
 	}
-	if (singleton->right){
+	if (singleton->game->getRight()){
 		//singleton->objList[0]->objectTex->moveRight(0.05);
 		singleton->game->moveRight();
 	}
 	
-	if (singleton->gameOver){
+	if (singleton->game->isOver()){
 		singleton->redraw();
 		glutTimerFunc(100, app_timer, value);
 	}
