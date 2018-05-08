@@ -23,12 +23,25 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 void App::draw() {
 	if (!game->isOver()) {
 		game->draw();
-		game->print();
 	}
 	else {
 		system("PAUSE");
 		exit(0);
 	}
+}
+
+void App::specialKeyPress(int key){
+    game->onPress(key);
+	
+	// Redraw the scene
+    redraw();
+}
+
+void App::specialKeyUp(int key){
+    game->onLift(key);
+	
+	// Redraw the scene
+    redraw();
 }
 
 void App::mouseDown(float x, float y){
@@ -51,12 +64,15 @@ void App::mouseDrag(float x, float y){
     redraw();
 }
 
+void App::idle(){
+	redraw();
+}
+
 void App::keyPress(unsigned char key) {
     if (key == 27){
         // Exit the app when Esc key is pressed
         exit(0);
     }
-	game->onPress(key);
 	
 	// Redraw the scene
 	redraw();

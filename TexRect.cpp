@@ -118,6 +118,31 @@ bool TexRect::contains(float mx, float my){
     return mx >= x && mx <= x+w && my <= y && my >= y - h;
 }
 
+ void TexRect::getPosition(float x,float y){
+    //TODO
+ }
+
+ float TexRect::getX() const{
+    return x;
+ }
+ float TexRect::getY() const{
+    return y;
+ }
+float TexRect::getWidth() const{
+    return w;
+}
+float TexRect::getHeight() const{
+    return h;
+}
+void TexRect::setX(float x){
+    this->x = x;
+}
+void TexRect::setY(float y){
+    this->y = y;
+}
+
+
+
 
 
 
