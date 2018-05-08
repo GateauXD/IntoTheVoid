@@ -20,23 +20,21 @@ void explode(int value){		//added the explode function
 void moveP(int value){
     if (singleton->shooting){
       for (unsigned i = 0; i < singleton->bullets.size(); i++){
-	
+
 	if(singleton->bullets.at(i)->getY() < .99){
 	    singleton->bullets.at(i)->moveUpP(.09);
 	    singleton->redraw();
       	    float bx = singleton->bullets.at(i)->x;
-            float by = singleton->bullets.at(i)->y;
+	    float by = singleton->bullets.at(i)->y;
 	    if (singleton->ball->contains(bx, by)){
-	        singleton->ball->animate();
-	        explode(0);
-            singleton->makeBall();
-           }
+		singleton->ball->animate();
+		explode(0);
+	    singleton->makeBall();
+	   }
 	    glutTimerFunc(64, moveP, value);
 	}
       }	
     }
-
-
 }
 
 
@@ -176,7 +174,7 @@ void App::draw() {
     // Set background color to black
     glClearColor(0.0, 0.0, 1.0, 1.0);
     
-	score->draw(); 
+    score->draw(); 
 	
     // Set up the transformations stack
     glMatrixMode(GL_MODELVIEW);
@@ -185,7 +183,7 @@ void App::draw() {
     background->draw();
     platform->draw();
     if(shooting){
-	for(unsigned i = 0; i < singleton->bullets.size(); i++){
+	for(unsigned i = 0; i < bullets.size(); i++){
 		bullets.at(i)->draw();
 	}
         
@@ -222,22 +220,22 @@ void App::mouseDrag(float x, float y){
 }
 
 void App::idle(){
-     if (singleton->shooting){
-      for (unsigned i = 0; i < singleton->bullets.size(); i++){
+     if (shooting){
+      for (unsigned i = 0; i < bullets.size(); i++){
 	
-	if(singleton->bullets.at(i)->getY() < .99){
-	    singleton->bullets.at(i)->moveUpP(.09);
-	    singleton->redraw();
-      	    float bx = singleton->bullets.at(i)->x;
-            float by = singleton->bullets.at(i)->y;
-	    if (singleton->ball->contains(bx, by)){
-	        singleton->ball->animate();
+	if(bullets.at(i)->getY() < .99){
+	    bullets.at(i)->moveUpP(.09);
+	    redraw();
+      	    float bx = bullets.at(i)->x;
+            float by = bullets.at(i)->y;
+	    if (ball->contains(bx, by)){
+	        ball->animate();
 	        explode(0);
             
             }
 	}
 	else{
-	    singleton->bullets.pop_back();
+	    bullets.pop_back();
 	}
       }	
     }
@@ -269,12 +267,12 @@ void App::keyPress(unsigned char key) {
     }
    
      if( key == ' '){
-        
-	TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
+        if (!game_over) {
+		TexRect *p = new TexRect("images/basicBullet.bmp", singleton->platform->getX() + singleton->platform->getW()/2, singleton->platform->getY(), 0.025, 0.025);
 	
-	singleton->bullets.push_back(p);
-        shooting = true;
-        
+		singleton->bullets.push_back(p);
+		shooting = true;
+        }
     }
    // projectiles(1);
     // moveP(1);
