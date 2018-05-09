@@ -33,7 +33,7 @@ public:
     void makeBall(int n);
     void makePowerup(int n);
     std::vector< TexRect*> asteroids;
-    std::vector< TexRect*> powerUp;
+    std::vector< TexRect*> Powerup;
     TexRect* platform;
 	//TexRect* pow;
     
