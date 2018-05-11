@@ -1,13 +1,13 @@
-#ifndef Asteroids
-#define Asteroids value
-
+#ifndef Asteroids_h
+#define Asteroids_h
+#include "TexRect.h"
 class Asteroids
 {
 	TexRect* texture;
 public:
 	Asteroids();
 
-	void exploade();
+	void explode();
 	
 	~Asteroids();
 	

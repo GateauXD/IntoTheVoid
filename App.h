@@ -36,7 +36,7 @@ public:
     std::vector< TexRect*> Powerup;
     TexRect* platform;
 	//TexRect* pow;
-    App* app;
+    static App* app;
     TexRect* background;
     
     std::vector< TexRect* > bullets;

@@ -1,9 +1,9 @@
 #ifndef	Game_h
 #define Game_h
 
-//#include "Powerup.h"
+#include "PowerUp.h"
 //#include "Player.h"
-//#include "Asteroids.h"
+#include "Asteroids.h"
 //#include "Bullets.h"
 #include "AnimatedRect.h"
 #include "TexRect.h"
@@ -17,21 +17,21 @@
 class Game{
 	std::vector<Asteroids*> asteroids;
 	std::vector<PowerUp*> Powerups;
-	std::vector<Projectiles*> bullets;
+	//std::vector<Projectiles*> bullets;
 
 	TexRect* background;
-	Player* player;
+	//Player* player;
 	AnimatedRect* gameOver;
-	Score* score;
+	//Score* score;
 
 	bool up;
 	bool down;
 	bool left;
 	bool right;
 	bool shooting;
-	bool moing;
+	bool moving;
 	bool game_over;
-	time_t spawnTimer;
+	//time_t spawnTimer;
 public:
 	Game();
 	
@@ -40,7 +40,7 @@ public:
 	void specialKeyUp(int key);
 	void makePlayer();	
 	void makeAsteroids(int nums);
-	void makePowerup();
+	void makePowerup(int);
 	void restart();
 	void pause();
 
