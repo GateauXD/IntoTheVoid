@@ -1,9 +1,12 @@
 #ifndef Asteroids_h
 #define Asteroids_h
-#include "TexRect.h"
-class Asteroids
-{
-	TexRect* texture;
+//#include "TexRect.h"
+
+#include "Object.h"
+
+class Asteroids : public Object {
+
+	//TexRect* texture;
 public:
 	Asteroids();
 

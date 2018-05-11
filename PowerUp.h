@@ -1,13 +1,16 @@
 #ifndef PowerUp_h
 #define PowerUp_h
 #include <vector>
-#include "TexRect.h"
+//#include "TexRect.h"
 #include "GlutApp.h"
 #include <stdlib.h>
 #include <time.h>
 #include "App.h"
-class PowerUp{
-	TexRect* tex;
+
+#include "Object.h"
+
+class PowerUp : public Object {
+	//TexRect* tex;
 	int* x;
 	int* y;
 public:
@@ -22,10 +25,5 @@ public:
 	~PowerUp();
 
 };
-
-
-
-
-
 
 #endif
