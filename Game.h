@@ -6,8 +6,9 @@
 //#include "Asteroids.h"
 //#include "Bullets.h"
 #include "AnimatedRect.h"
-#include "TextRect.h"
+#include "TexRect.h"
 #include "GlutApp.h"
+#include "Score.h"
 
 #include <vector>
 #include <stdlib.h>
@@ -18,9 +19,9 @@ class Game{
 	std::vector<PowerUp*> Powerups;
 	std::vector<Projectiles*> bullets;
 
-	TextRect* background;
+	TexRect* background;
 	Player* player;
-	Animated Rect* gameOver;
+	AnimatedRect* gameOver;
 	Score* score;
 
 	bool up;
@@ -37,18 +38,13 @@ public:
 	void draw();
 	void specialKeyPress(int key);
 	void specialKeyUp(int key);
-	void idle();
 	void makePlayer();	
-	void makeAsteroids();
+	void makeAsteroids(int nums);
 	void makePowerup();
 	void restart();
 	void pause();
 
 	~Game();	
+	 time_t spawnTimer;
 };
-
-
-
-
-
 #endif

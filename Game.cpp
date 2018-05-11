@@ -26,7 +26,7 @@ void Game::draw(){
 
 	background->draw();
 	player->draw();
-	score0->draw();
+	score->draw();
 	if(shooting){
 		for(unsigned i = 0; i < bullets.size(); i++){
 			bullets.at(i)->draw();
@@ -78,8 +78,20 @@ void Game::specialKeyUp(int key){
 	}
 }
 
-void Game::idle(){
+void Game::makePowerup(int num){
+	for(int i = 0; i < num; i++){
+		PowerUp* a = new Asteroids();
+		Powerups.push_back(a);
+		//Redraw();
+	}
+}
 
+void Game::makeAsteroids(int num){
+	for(int i = 0; i < num; i++){
+		Asteroids* a = new Asteroids();
+		asteroids.push_back(a);
+		//Redraw();
+	}
 }
 
 void Game::makePlayer(){
@@ -87,7 +99,7 @@ void Game::makePlayer(){
 }
 
 void Game::restart(){
-
+	
 }
 
 void Game::pause(){
