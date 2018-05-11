@@ -114,22 +114,16 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	mx = 0.0;
 	my = 0.0;
 
-	background = new TexRect("images/back.png", -1, 1, 2, 2);
-
-
     //ball = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, 0, 0.67, 0.2, 0.2);
 
-	platform = new TexRect("images/spaceship.pod_.1.red_.png", "images/exp2_0.png", 4, 4, 0, -0.7, 0.2, 0.2);
-    //pow = new TexRect("images/mushroom.png" ,0, 0,.2,.2);
-	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
+	game = new Game();
+
 	shooting = up = down = left = right = false;
 
 	float yy = this->platform->getY();
 	float xx = this->platform->getX();
 	float ww = this->platform->getW();
 	float hh = this->platform->getH();
-	
-	score = new Score( 0.7, 0.9 );
 
 	srand (time(NULL));
 	makeBall(5);
@@ -187,27 +181,8 @@ void App::draw() {
     // Set up the transformations stack
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//pow->draw();
-	background->draw();
-	platform->draw();
-	//pow->draw();
-	score->draw(); 
-	if(shooting){
-		for(unsigned i = 0; i < bullets.size(); i++){
-			bullets.at(i)->draw();
-		}
 
-	}
-	for(unsigned i = 0; i < singleton->asteroids.size(); i++){
-		asteroids.at(i)->draw();
-	}
-    //ball->draw();
-for(unsigned i = 0; i < singleton->Powerup.size(); i++){
-		Powerup.at(i)->draw();
-	}
-	gameOver->draw();
-
-
+	game->draw;
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
 	glFlush();
@@ -278,10 +253,6 @@ void App::keyPress(unsigned char key) {
         // Exit the app when Esc key is pressed
 
         //delete ball;
-		delete platform;
-		delete gameOver;
-		delete background;
-		delete score;
 		//delete pow;
 		//delete asteroids;
 		//delete bullets;

@@ -32,18 +32,10 @@ public:
 	
     void makeBall(int n);
     void makePowerup(int n);
-    std::vector< TexRect*> asteroids;
-    std::vector< TexRect*> Powerup;
-    TexRect* platform;
-	//TexRect* pow;
     static App* app;
-    TexRect* background;
-    
-    std::vector< TexRect* > bullets;
-    
-    AnimatedRect* gameOver;
+
 	friend class Game;
-	Score* score;
+    Game* game;
     
     bool up;
     bool down;
