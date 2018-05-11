@@ -1,5 +1,5 @@
-#ifndef	GAME_H
-#define GAME_H value
+#ifndef	Game_h
+#define Game_h
 
 //#include "Powerup.h"
 //#include "Player.h"

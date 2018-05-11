@@ -36,13 +36,13 @@ public:
     std::vector< TexRect*> Powerup;
     TexRect* platform;
 	//TexRect* pow;
-    
+    App* app;
     TexRect* background;
     
     std::vector< TexRect* > bullets;
     
     AnimatedRect* gameOver;
-	
+	friend class Game;
 	Score* score;
     
     bool up;
