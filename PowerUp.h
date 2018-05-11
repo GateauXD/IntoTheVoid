@@ -10,10 +10,9 @@ class PowerUp{
 	TexRect* tex;
 	int* x;
 	int* y;
-	static App* singleton;
 public:
 
-	PowerUp(App* a);
+	PowerUp();
 	void draw();
 	void animate();
 	TexRect getTex();

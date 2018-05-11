@@ -8,11 +8,11 @@ public:
 	Asteroids();
 
 	void explode();
+
+	void draw();
 	
 	~Asteroids();
 	
 };
-
-
 
 #endif

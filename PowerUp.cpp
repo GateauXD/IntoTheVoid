@@ -1,10 +1,9 @@
 #include "PowerUp.h"
-PowerUp::PowerUp(App* a)
+PowerUp::PowerUp()
 {
 	*x = ((float)(rand() % 200) / 100)-1;
 	*y = ((float)(rand() % 200) / 100)-1;
 	tex=new TexRect("images/mushroom.png", "images/exp2_0.png", 4, 4, *x, *y, 0.2, 0.2);
-	singleton = a;
 }
 
 
