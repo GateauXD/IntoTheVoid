@@ -7,7 +7,6 @@ void explodeAsteroid(int value){		//added the explode function
 	for (unsigned i = 0; i < p->game->asteroids.size();i++){
 		if(!p->game->asteroids.at(i)->getHB()->done()){	//check if the animation has already been done
 			p->game->asteroids.at(i)->getHB()->advance();  //start advancing through explosion map
-			//p->game->redraw();
 			glutTimerFunc(32, explodeAsteroid, value); //recursive timer function to keep advancing and redrawing the map 
 		}
 	}
@@ -16,7 +15,6 @@ void explodeAsteroid(int value){		//added the explode function
 void explodeShip(int value){
     if(!p->game->player->getHB()->done()){	//check if the animation has already been done
 		p->game->player->getHB()->advance();  //start advancing through explosion map
-		//p->game->redraw();
 		glutTimerFunc(32, explodeShip, value); //recursive timer function to keep advancing and redrawing the map 
 	}
 }
@@ -44,7 +42,7 @@ void app_timer(int value){
 		}
 
 		for(unsigned i = 0; i < p->game->Powerup.size(); i++){
-			p->game->Powerup.at(i)->getHB()->jump();
+			//p->game->Powerup.at(i)->getHB()->jump();
 			float bx = p->game->Powerup.at(i)->getHB()->x + p->game->Powerup.at(i)->getHB()->w/2;
 			float by = p->game->Powerup.at(i)->getHB()->y - p->game->Powerup.at(i)->getHB()->h + 0.1;
 			if (p->game->player->getHB()->contains(bx, by)){
@@ -105,23 +103,12 @@ Game::Game(App* a){
 	app_timer(1);
 	time(&spawnTimer);
 
-	//std::cout<<"Game Done\n";
 }
-/*
-void spawnEnemies(int n) {
-	PowerUp *e;
-	float x = ((float)(rand() % 200) / 100)-1;
-	float y = ((float)(rand() % 200) / 100)-1;
-	for (int i = 0; i < 10; i++) {
-		e = new Enemy(x, y);
-		objList.push_back(e);
-	}
-}*/
 
 void Game::makeAsteroids(int n) {
 	Asteroids *a;
 	for (int i = 0; i < n; i++){			
-		float x = ((float)(rand() % 200) / 100)-1;			
+		float x = ((float)(rand() % 180) / 100)-1;			
 		a = new Asteroids(x, .8);
 		asteroids.push_back(a);
 	}
@@ -130,8 +117,8 @@ void Game::makeAsteroids(int n) {
 void Game::makePowerup(int n) {
 	PowerUp *a;
 	for (int i = 0; i < n; i++){			
-		float x = ((float)(rand() % 160) / 100) - 0.8;
-		float y = ((float)(rand() % 160) / 100) - 0.8;		
+		float x = ((float)(rand() % 180) / 100) - 1;
+		float y = ((float)(rand() % 180) / 100) - 0.8;		
 		a = new PowerUp(x, y);
 		Powerup.push_back(a);
 	}
@@ -260,14 +247,11 @@ void Game::keyPress(unsigned char key) {
 
 
 		delete this;
-
-		exit(0);
 	}
 
 	if( key == ' '){
 		if (!game_over) {
 			makeBullet();
-			//shooting = true;
 		}
 	}
 
