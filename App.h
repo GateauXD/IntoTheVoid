@@ -1,15 +1,9 @@
 #ifndef App_hpp
 #define App_hpp
 
-#include "GlutApp.h"
-#include "TexRect.h"
-#include "AnimatedRect.h"
 #include "Score.h"
 #include <vector>
-
-#include <stdlib.h>	//rand()
-#include <time.h>	//time()
-
+#include "Game.h"
 class App: public GlutApp {
     // Maintain app state here
     float mx;
@@ -30,31 +24,10 @@ public:
     
     void idle();
 	
-    void makeBall(int n);
-    void makePowerup(int n);
-    std::vector< TexRect*> asteroids;
-    std::vector< TexRect*> Powerup;
-    TexRect* platform;
-	//TexRect* pow;
-    
-    TexRect* background;
-    
-    std::vector< TexRect* > bullets;
-    
-    AnimatedRect* gameOver;
-	
-	Score* score;
-    
-    bool up;
-    bool down;
-    bool left;
-    bool right;
-    bool shooting;
-    bool moving;
-    bool game_over;
+    static App* app;
 
-    time_t spawnTimer;
-    
+	friend class Game;
+    Game* game; 
 };
 
 #endif

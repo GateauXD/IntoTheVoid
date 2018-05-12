@@ -1,24 +1,24 @@
 #include "App.h"
-#include <iostream>
 
-static App* singleton;
+//static App* singleton;
 
+/*
 void explodeAsteroid(int value){		//added the explode function 
 	for (unsigned i = 0; i < singleton->asteroids.size();i++){
-    if(!singleton->asteroids.at(i)->done()){	//check if the animation has already been done
-		singleton->asteroids.at(i)->advance();  //start advancing through explosion map
-		singleton->redraw();
-		glutTimerFunc(32, explodeAsteroid, value); //recursive timer function to keep advancing and redrawing the map 
+		if(!singleton->asteroids.at(i)->done()){	//check if the animation has already been done
+			singleton->asteroids.at(i)->advance();  //start advancing through explosion map
+			singleton->redraw();
+			glutTimerFunc(32, explodeAsteroid, value); //recursive timer function to keep advancing and redrawing the map 
+		}
 	}
-}
 }
 
 void explodeShip(int value){
     if(!singleton->platform->done()){	//check if the animation has already been done
-	singleton->platform->advance();  //start advancing through explosion map
-	singleton->redraw();
-	glutTimerFunc(32, explodeShip, value); //recursive timer function to keep advancing and redrawing the map 
-}
+		singleton->platform->advance();  //start advancing through explosion map
+		singleton->redraw();
+		glutTimerFunc(32, explodeShip, value); //recursive timer function to keep advancing and redrawing the map 
+	}
 }
 
 void app_timer(int value){
@@ -39,12 +39,6 @@ void app_timer(int value){
 				singleton->moving = false;
 				singleton->game_over = true;
 				singleton->gameOver->animate();
-                /*singleton->ball->rising = true;
-                singleton->ball->yinc +=0.005;
-                singleton->ball->xinc = singleton->ball->yinc;
-                if (singleton->ball->yinc > 0.15){
-                    singleton->ball->yinc = 0.15;
-                }*/
 			}
 		}
 
@@ -60,164 +54,60 @@ void app_timer(int value){
 		}
 	}
 
-if (singleton->up){
-	singleton->platform->moveUp(0.05);
-}
-if (singleton->down){
-	singleton->platform->moveDown(0.05);
-}
-if (singleton->left){
-	singleton->platform->moveLeft(0.05);
-}
-if (singleton->right){
-	singleton->platform->moveRight(0.05);
-}
+	if (singleton->up){
+		singleton->platform->moveUp(0.05);
+	}
+	if (singleton->down){
+		singleton->platform->moveDown(0.05);
+	}
+	if (singleton->left){
+		singleton->platform->moveLeft(0.05);
+	}
+	if (singleton->right){
+		singleton->platform->moveRight(0.05);
+	}
 
-if (singleton->game_over){
-	singleton->redraw();
-	glutTimerFunc(100, app_timer, value);
-}
-else{
-	if (singleton->up || singleton->down || singleton->left || singleton->right || singleton->moving && !singleton->game_over){
+	if (singleton->game_over){
 		singleton->redraw();
-		glutTimerFunc(16, app_timer, value);
+		glutTimerFunc(100, app_timer, value);
+	}
+	else{
+		if (singleton->up || singleton->down || singleton->left || singleton->right || singleton->moving && !singleton->game_over){
+			singleton->redraw();
+			glutTimerFunc(16, app_timer, value);
+		}
 	}
 }
-
-
-}
-
-void App::makeBall(int n) {
-	TexRect *a;
-	for (int i = 0; i < n; i++){			
-		float x = ((float)(rand() % 200) / 100)-1;			
-		a = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, x, .8, 0.2, 0.2);
-		asteroids.push_back(a);
-	}
-}
-
-void App::makePowerup(int n) {
-	TexRect *a;
-	for (int i = 0; i < n; i++){			
-		float x = ((float)(rand() % 200) / 100)-1;
-		float y = ((float)(rand() % 200) / 100)-1;			
-		a = new TexRect("images/mushroom.png", "images/exp2_0.png", 4, 4, x, y, 0.2, 0.2);
-		Powerup.push_back(a);
-	}
-}
+*/
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
 
-	singleton = this;
+	//singleton = this;
+	app=this;
 	mx = 0.0;
 	my = 0.0;
 
-	background = new TexRect("images/back.png", -1, 1, 2, 2);
-
-
-    //ball = new TexRect("images/asteroid.png", "images/exp2_0.png", 4, 4, 0, 0.67, 0.2, 0.2);
-
-	platform = new TexRect("images/spaceship.pod_.1.red_.png", "images/exp2_0.png", 4, 4, 0, -0.7, 0.2, 0.2);
-    //pow = new TexRect("images/mushroom.png" ,0, 0,.2,.2);
-	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
-	shooting = up = down = left = right = false;
-
-	float yy = this->platform->getY();
-	float xx = this->platform->getX();
-	float ww = this->platform->getW();
-	float hh = this->platform->getH();
-	
-	score = new Score( 0.7, 0.9 );
-
-	srand (time(NULL));
-	makeBall(5);
-	makePowerup(1);
-	moving = true;
-	game_over = false;
-
-	time(&spawnTimer);
-	app_timer(1);
-
+	game = new Game();
 }
 
 void App::specialKeyPress(int key){
-	if (!game_over){
-		if (key == 100){
-			left = true;
-		}
-		if (key == 101){
-			up = true;
-		}
-		if (key == 102){
-			right = true;
-		}
-		if (key == 103){
-			down = true;
-		}
-	}
+	game->specialKeyPress(key);
 }
 
 void App::specialKeyUp(int key){
-	if (key == 100) {
-		left = false;
-	}
-	if (key == 101) {
-		up = false;
-	}
-	if (key == 102) {
-		right = false;
-	}
-	if (key == 103) {
-		down = false;
-	}
+	game->specialKeyUp(key);
 }
 
 void App::draw() {
-
-    // Clear the screen
-	glClear(GL_COLOR_BUFFER_BIT);
-
-    // Set background color to black
-	glClearColor(0.0, 0.0, 1.0, 1.0);
-
-    //score->draw(); 
-	
-    // Set up the transformations stack
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	//pow->draw();
-	background->draw();
-	platform->draw();
-	//pow->draw();
-	score->draw(); 
-	if(shooting){
-		for(unsigned i = 0; i < bullets.size(); i++){
-			bullets.at(i)->draw();
-		}
-
-	}
-	for(unsigned i = 0; i < singleton->asteroids.size(); i++){
-		asteroids.at(i)->draw();
-	}
-    //ball->draw();
-for(unsigned i = 0; i < singleton->Powerup.size(); i++){
-		Powerup.at(i)->draw();
-	}
-	gameOver->draw();
-
-
-    // We have been drawing everything to the back buffer
-    // Swap the buffers to see the result of what we drew
-	glFlush();
-	glutSwapBuffers();
+	game->draw();
 }
 
+/*
 void App::mouseDown(float x, float y){
     // Update app state
 	mx = x;
 	my = y;
-
 }
 
 void App::mouseDrag(float x, float y){
@@ -225,85 +115,21 @@ void App::mouseDrag(float x, float y){
 	mx = x;
 	my = y;
 
-     /*if(ball->contains(mx, my)){		//added if statement to check if the image has been clicked
-	if(!ball->done()){
-	    ball->animate();	//changes animating boolean to true
-	    explodeAsteroid(0);	                //starts the advance and redraw recursive function to cycle through map
-	    score->add(10);
-	}
-    }*/
-
+    if(ball->contains(mx, my)){		//added if statement to check if the image has been clicked
+		if(!ball->done()){
+			ball->animate();		//changes animating boolean to true
+			explodeAsteroid(0);	    //starts the advance and redraw recursive function to cycle through map
+			score->add(10);
+		}
+    }
 }
+*/
 
 void App::idle(){
-	if (shooting){
-		for (unsigned i = 0; i < bullets.size(); i++){
-
-			if(bullets.at(i)->getY() < .99){
-				bullets.at(i)->moveUpP(.09);
-				redraw();
-				float bx = bullets.at(i)->x;
-				float by = bullets.at(i)->y;
-				for(unsigned i = 0; i < asteroids.size(); i++){
-					if (asteroids.at(i)->contains(bx, by)){
-						asteroids.at(i)->animate();
-						explodeAsteroid(0);
-						score->add(10);
-						delete asteroids.at(i);
-						asteroids.erase(asteroids.begin() + i);
-					}
-
-				}
-			}
-			else{
-				delete bullets.at(i);
-				bullets.erase(bullets.begin() + i);
-			}
-		}	
-	}
-	time_t newTime;
-	time(&newTime);
-	if (difftime(newTime, spawnTimer) > 3 || asteroids.size() < 3) {
-		makeBall(1);
-		spawnTimer = newTime;
-	}
-	if (Powerup.size() < 3) {
-		makePowerup(1);
-	}
+	game->tick();
+	redraw();
 }
 
 void App::keyPress(unsigned char key) {
-	if (key == 27){
-        // Exit the app when Esc key is pressed
-
-        //delete ball;
-		delete platform;
-		delete gameOver;
-		delete background;
-		delete score;
-		//delete pow;
-		//delete asteroids;
-		//delete bullets;
-		delete this;
-
-		exit(0);
-	}
-
-	/*if (key == 13){
-       		char pause = ' ';
-		while (pause != 'g') {
-			std::cin >> pause;
-		}
-	}*/
-
-	if( key == ' '){
-		if (!game_over) {
-			TexRect *p = new TexRect("images/basicBullet.bmp", platform->getX() + platform->getW()/2, platform->getY(), 0.025, 0.025);
-
-			bullets.push_back(p);
-			shooting = true;
-		}
-	}
-   // projectiles(1);
-    // moveP(1);
+	game->keyPress(key);
 }
