@@ -37,6 +37,7 @@ void app_timer(int value){
 				p->game->player->getHB()->animate();
 				p->game->asteroids.at(i)->getHB()->animate();
 				explodeShip(0);
+				explodeAsteroid(0);
 				p->game->moving = false;
 				p->game->game_over = true;
 				p->game->gameOver->animate();

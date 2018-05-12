@@ -1,14 +1,14 @@
 #include "Player.h"
 
 Player::Player(){
-	objectTex = new TexRect("images/spaceship.pod_.1.red_.png","images/exp2_0.png",6,6,0, -0.7, .2, .2);
+	objectTex = new TexRect("images/spaceship.pod_.1.red_.png","images/exp2_0.png",4,4,0, -0.7, .2, .2);
 	firerate = 5;
 	speed = 0.05;
 	
 	up = down = left = right  = false;
 }
 Player::Player(int rate){
-	objectTex = new TexRect("images/spaceship.pod_.1.red_.png","images/exp2_0.png",6,6,0, -0.7, .2, .2);
+	objectTex = new TexRect("images/spaceship.pod_.1.red_.png","images/exp2_0.png",4,4,0, -0.7, .2, .2);
 	firerate = rate;
 	speed = 0.05;
 	
