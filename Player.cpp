@@ -1,4 +1,4 @@
-#include "Player.h"
+ #include "Player.h"
 
 Player::Player(){
 	objectTex = new TexRect("assets/PlayerShip.bmp","assets/fireball.bmp",6,6,0, -0.7, .2, .2);
@@ -62,6 +62,19 @@ bool Player::isLeft() {
 }
 bool Player::isRight() {
 	return right;
+}
+
+void Player::setUp(bool t) {
+	up = t;
+}
+void Player::setDown(bool t) {
+	down = t;
+}
+void Player::setLeft(bool t) {
+	left = t;
+}
+void Player::setRight(bool t) {
+	right = t;
 }
 
 void Player::moveUp(float d){
