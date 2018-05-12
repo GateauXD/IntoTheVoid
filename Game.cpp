@@ -79,9 +79,9 @@ void app_timer(int value){
 	}
 }
 
-Game::Game(){
+Game::Game(App* a){
 	game_over = false;
-	p=App::app;
+	p=a;
 
 	background = new TexRect("assests/background1.png", -1, 1, 2, 2);
 	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);

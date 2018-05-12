@@ -13,7 +13,7 @@
 #include <vector>
 #include <stdlib.h>	//rand()
 #include <time.h>	//time()
-
+class App;
 class Game {
 public:
 	Player *player;
@@ -28,7 +28,7 @@ public:
 	bool moving;
 	bool game_over;
 
-	Game();
+	Game(App*);
 	
 	void tick();
 	void draw();
