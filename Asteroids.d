@@ -1,1 +1,2 @@
-Asteroids.o: Asteroids.cpp Asteroids.h TexRect.h SOIL/includes/SOIL.h
+Asteroids.o: Asteroids.cpp Asteroids.h Ship.h Object.h TexRect.h \
+ SOIL/includes/SOIL.h

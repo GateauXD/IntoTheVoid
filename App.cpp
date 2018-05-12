@@ -83,7 +83,6 @@ void app_timer(int value){
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
 
-	singleton = this;
 	app=this;
 	mx = 0.0;
 	my = 0.0;

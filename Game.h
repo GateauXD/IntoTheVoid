@@ -1,10 +1,11 @@
 #ifndef	Game_h
 #define Game_h
 
+#include "App.h"
 #include "PowerUp.h"
 #include "Player.h"
 #include "Asteroids.h"
-#include "Projectiles.h"
+#include "Projectile.h"
 #include "AnimatedRect.h"
 #include "TexRect.h"
 #include "GlutApp.h"
@@ -19,7 +20,7 @@ class Game {
 	Player *player;
 	std::vector<Asteroids*> asteroids;
 	std::vector<PowerUp*> Powerups;
-	std::vector<Projectiles*> bullets;
+	std::vector<Projectile*> bullets;
 
 	TexRect* background;
 	AnimatedRect* gameOver;
@@ -35,8 +36,9 @@ public:
 	void draw();
 	void specialKeyPress(int key);
 	void specialKeyUp(int key);
+	void keyPress(unsigned char key);
 
 	~Game();	
-	 time_t spawnTimer;
+	 //time_t spawnTimer;
 };
 #endif

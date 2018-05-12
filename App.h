@@ -2,6 +2,7 @@
 #define App_hpp
 
 #include "Score.h"
+#include "Game.h"
 #include <vector>
 
 class App: public GlutApp {
