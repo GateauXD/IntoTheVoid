@@ -22,7 +22,7 @@ void explodeShip(int value){
 }
 
 void app_timer(int value){
-	//std::cout<<"App timer\n";
+	std::cout<<"App timer\n";
 	if (p->game->game_over){
 		p->game->gameOver->advance();
 	}
@@ -44,7 +44,7 @@ void app_timer(int value){
 		}
 
 		for(unsigned i = 0; i < p->game->Powerup.size(); i++){
-			//singleton->Powerup.at(i)->jump();
+			p->game->Powerup.at(i)->getHB()->jump();
 			float bx = p->game->Powerup.at(i)->getHB()->x + p->game->Powerup.at(i)->getHB()->w/2;
 			float by = p->game->Powerup.at(i)->getHB()->y - p->game->Powerup.at(i)->getHB()->h + 0.1;
 			if (p->game->player->getHB()->contains(bx, by)){
@@ -69,12 +69,12 @@ void app_timer(int value){
 	}
 
 	if (p->game->game_over){
-		//p->game->redraw();
+		p->game->draw();
 		glutTimerFunc(100, app_timer, value);
 	}
 	else{
 		if (p->game->player->isUp() || p->game->player->isDown() || p->game->player->isLeft() || p->game->player->isRight() || p->game->moving && !p->game->game_over){
-			//p->game->redraw();
+			p->game->draw();
 			glutTimerFunc(16, app_timer, value);
 		}
 	}
@@ -100,7 +100,7 @@ Game::Game(App* a){
 	
 	makeAsteroids(5);
 	makePowerup(1);
-	
+	app_timer(1);
 	time(&spawnTimer);
 
 	//std::cout<<"Game Done\n";
