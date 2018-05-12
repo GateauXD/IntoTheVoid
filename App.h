@@ -1,14 +1,8 @@
 #ifndef App_hpp
 #define App_hpp
 
-#include "GlutApp.h"
-#include "TexRect.h"
-#include "AnimatedRect.h"
 #include "Score.h"
 #include <vector>
-
-#include <stdlib.h>	//rand()
-#include <time.h>	//time()
 
 class App: public GlutApp {
     // Maintain app state here
@@ -30,23 +24,10 @@ public:
     
     void idle();
 	
-    void makeBall(int n);
-    void makePowerup(int n);
     static App* app;
 
 	friend class Game;
-    Game* game;
-    
-    bool up;
-    bool down;
-    bool left;
-    bool right;
-    bool shooting;
-    bool moving;
-    bool game_over;
-
-    time_t spawnTimer;
-    
+    Game* game; 
 };
 
 #endif

@@ -2,26 +2,26 @@
 #define OBJECT_H
 
 #include "TexRect.h"
-//#include "Circle.h"
 
 class Object {
-public:
+protected:
 	TexRect* objectTex;
     float speed;
-	
+
+public:
 	float getSpeed() const;
-	TexRect* getHB() const;
+	virtual TexRect* getHB() const;
 	
-	virtual bool checkCollision(float x, float y); // virtual keyword added to allow for different child collision types (eg. circular)
-	virtual void getPosition(float &x, float &y);
-	virtual void movePos(unsigned char key)=0; // may not need pure virtual (powerup), just want to style on 'em
-	
-//hitbox
-	//virtual void getHB(float &x, float &y, float &w, float &h);
-	//virtual void getTexture(float &r, float &g, float &b);
-	//virtual void draw();
+	virtual bool checkCollision( Object &obj );
+	virtual float getX();
+	virtual float getY();
+	virtual float getW();
+	virtual float getH();
+	virtual void movePos(unsigned char key); // may not need pure virtual (powerup), just want to style on 'em
+	virtual void draw()=0;
+
 	virtual ~Object();
-	};
+};
 
 
 #endif
