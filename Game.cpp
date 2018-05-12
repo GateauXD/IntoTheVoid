@@ -22,7 +22,7 @@ void explodeShip(int value){
 }
 
 void app_timer(int value){
-	std::cout<<"App timer\n";
+	//std::cout<<"App timer\n";
 	if (p->game->game_over){
 		p->game->gameOver->advance();
 	}
@@ -176,16 +176,22 @@ void Game::draw(){
 }
 
 void Game::specialKeyPress(int key){
+	std::cout<<"S key: "<<key<<"\n";
 	if(!game_over){
 		switch(key){
 			case 100:
+			std::cout<<"1\n";
 			player->setLeft(true);
+			break;
 			case 101:
 			player->setUp(true);
+			break;
 			case 102:
 			player->setRight(true);
+			break;
 			case 103:
 			player->setDown(true);
+			break;
 		}
 	}
 }
@@ -195,12 +201,16 @@ void Game::specialKeyUp(int key){
 		switch(key){
 			case 100:
 			player->setLeft(false);
+			break;
 			case 101:
 			player->setUp(false);
+			break;
 			case 102:
 			player->setRight(false);
+			break;
 			case 103:
 			player->setDown(false);
+			break;
 		}
 	}
 }
