@@ -39,7 +39,10 @@ float Object::getH()
 
 //}
 
+void Object::movePos(unsigned char key)
+{
 
+}
  Object::~Object() 
 {
 	delete Object::objectTex;

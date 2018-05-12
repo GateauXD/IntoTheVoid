@@ -176,20 +176,20 @@ void Game::specialKeyPress(int key){
 	}
 }
 
-/*void Game::specialKeyUp(int key){
-	if(!game_over){
-		switch(key){
-			case 100:
-			left = false;
-			case 101:
-			player->isUp() = false;
-			case 102:
-			right = false;
-			case 103:
-			down = false;
-		}
-	}
-}*/
+void Game::specialKeyUp(int key){
+	//if(!game_over){
+		//switch(key){
+			//case 100:
+			//left = false;
+			//case 101:
+			//player->isUp() = false;
+			//case 102:
+			//right = false;
+			//case 103:
+			//down = false;
+		//}
+	//}
+}
 
 void Game::tick(){
 	for (unsigned i = 0; i < bullets.size(); i++){
@@ -217,7 +217,7 @@ void Game::tick(){
 	time_t newTime;
 	time(&newTime);
 	if (difftime(newTime, spawnTimer) > 3 || asteroids.size() < 3) {
-		makeBall(1);
+		makeAsteroids(1);
 		spawnTimer = newTime;
 	}
 	if (Powerup.size() < 3) {
@@ -256,4 +256,6 @@ void Game::keyPress(unsigned char key) {
 			//shooting = true;
 		}
 	}
+
+
 }

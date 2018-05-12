@@ -4,6 +4,8 @@
 #include "Score.h"
 #include <vector>
 #include "Game.h"
+#include "GlutApp.h"
+
 class App: public GlutApp {
     // Maintain app state here
     float mx;

@@ -1,5 +1,4 @@
 #include "App.h"
-
 //static App* singleton;
 
 /*
@@ -84,7 +83,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     // Initialize state variables
 
 	//singleton = this;
-	app=this;
+	app= this;
 	mx = 0.0;
 	my = 0.0;
 
@@ -103,27 +102,27 @@ void App::draw() {
 	game->draw();
 }
 
-/*
+
 void App::mouseDown(float x, float y){
     // Update app state
-	mx = x;
-	my = y;
+	//mx = x;
+	//my = y;
 }
 
 void App::mouseDrag(float x, float y){
     // Update app state
-	mx = x;
-	my = y;
+	//mx = x;
+	//my = y;
 
-    if(ball->contains(mx, my)){		//added if statement to check if the image has been clicked
-		if(!ball->done()){
-			ball->animate();		//changes animating boolean to true
-			explodeAsteroid(0);	    //starts the advance and redraw recursive function to cycle through map
-			score->add(10);
-		}
-    }
+   // if(ball->contains(mx, my)){		//added if statement to check if the image has been clicked
+		//if(!ball->done()){
+			//ball->animate();		//changes animating boolean to true
+			//explodeAsteroid(0);	    //starts the advance and redraw recursive function to cycle through map
+			//score->add(10);
+		//}
+  //  }
 }
-*/
+
 
 void App::idle(){
 	game->tick();

@@ -38,8 +38,8 @@ public:
 	void makePowerup(int n);
 	void makeAsteroids(int n);
 	void makeBullet();
-	void makeBall(int n);
-	~Game();	
+	//void makeBall(int n);
+	~Game(){};	
 	 time_t spawnTimer;
 };
 #endif
