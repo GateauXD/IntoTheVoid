@@ -20,7 +20,7 @@ void explodeShip(int value){
 }
 
 void app_timer(int value){
-	std::cout<<"App timer\n";
+	//std::cout<<"App timer\n";
 	if (p->game->game_over){
 		p->game->gameOver->advance();
 	}
@@ -35,6 +35,7 @@ void app_timer(int value){
 				p->game->player->getHB()->animate();
 				p->game->asteroids.at(i)->getHB()->animate();
 				explodeShip(0);
+				explodeAsteroid(0);
 				p->game->moving = false;
 				p->game->game_over = true;
 				p->game->gameOver->animate();
@@ -53,16 +54,16 @@ void app_timer(int value){
 		}
 	}
 
-	if (p->game->up){
+	if (p->game->player->isUp()){
 		p->game->player->moveUp(0.05);
 	}
-	if (p->game->down){
+	if (p->game->player->isDown()){
 		p->game->player->moveDown(0.05);
 	}
-	if (p->game->left){
+	if (p->game->player->isLeft()){
 		p->game->player->moveLeft(0.05);
 	}
-	if (p->game->right){
+	if (p->game->player->isRight()){
 		p->game->player->moveRight(0.05);
 	}
 
@@ -166,29 +167,36 @@ void Game::specialKeyPress(int key){
 	if(!game_over){
 		switch(key){
 			case 100:
+			std::cout<<"1\n";
 			player->setLeft(true);
+			break;
 			case 101:
 			player->setUp(true);
+			break;
 			case 102:
 			player->setRight(true);
+			break;
 			case 103:
 			player->setDown(true);
+			break;
 		}
 	}
 }
 
 void Game::specialKeyUp(int key){
-	if(!game_over){
-		switch(key){
-			case 100:
-			player->setLeft(false);
-			case 101:
-			player->setUp(false);
-			case 102:
-			player->setRight(false);
-			case 103:
-			player->setDown(false);
-		}
+	switch(key){
+		case 100:
+		player->setLeft(false);
+		break;
+		case 101:
+		player->setUp(false);
+		break;
+		case 102:
+		player->setRight(false);
+		break;
+		case 103:
+		player->setDown(false);
+		break;
 	}
 }
 
@@ -196,7 +204,6 @@ void Game::tick(){
 	for (unsigned i = 0; i < bullets.size(); i++){
 		if(bullets.at(i)->getY() < .99){
 			bullets.at(i)->getHB()->moveUpP(.09);
-			//redraw();
 			float bx = bullets.at(i)->getHB()->x;
 			float by = bullets.at(i)->getHB()->y;
 			for(unsigned i = 0; i < asteroids.size(); i++){
@@ -244,7 +251,6 @@ void Game::keyPress(unsigned char key) {
 		for(unsigned i = 0; i < Powerup.size(); i++){
 			delete Powerup.at(i);
 		}
-
 
 		delete this;
 	}

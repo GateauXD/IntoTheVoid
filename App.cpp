@@ -4,7 +4,7 @@ static App* singleton;
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
 	std::cout<<"App\n";
-	singleton = this;
+	//singleton = this;
 	//app= singleton;
 	mx = 0.0;
 	my = 0.0;
@@ -46,4 +46,5 @@ void App::keyPress(unsigned char key) {
 
 		exit(0);
 	}
+	redraw();
 }
