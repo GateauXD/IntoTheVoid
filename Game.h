@@ -27,6 +27,10 @@ public:
 
 	bool moving;
 	bool game_over;
+	bool up;
+	bool down;
+	bool left;
+	bool right;
 
 	Game(App*);
 	

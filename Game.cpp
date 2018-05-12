@@ -55,16 +55,16 @@ void app_timer(int value){
 		}
 	}
 
-	if (p->game->player->isUp()){
+	if (p->game->up){
 		p->game->player->moveUp(0.05);
 	}
-	if (p->game->player->isDown()){
+	if (p->game->down){
 		p->game->player->moveDown(0.05);
 	}
-	if (p->game->player->isLeft()){
+	if (p->game->left){
 		p->game->player->moveLeft(0.05);
 	}
-	if (p->game->player->isRight()){
+	if (p->game->right){
 		p->game->player->moveRight(0.05);
 	}
 
@@ -89,12 +89,14 @@ Game::Game(App* a){
 	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
 	score = new Score(0.7,0.9);
 
+	left = right = down = up = false;
+
 	game_over = false;
 	moving = true;
 	
 	player = new Player();
 	//objList.push_back(player);
-		
+
 	srand (time(NULL));
 	//spawnEnemies(5);
 	
@@ -149,7 +151,7 @@ void Game::draw(){
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-		background->draw();	
+	background->draw();	
 
 	score->draw();
 
@@ -175,23 +177,32 @@ void Game::draw(){
 
 void Game::specialKeyPress(int key){
 	if(!game_over){
-	player->movePos(key);
+		switch(key){
+			case 100:
+			left = true;
+			case 101:
+			up = true;
+			case 102:
+			right = true;
+			case 103:
+			down = true;
+		}
 	}
 }
 
 void Game::specialKeyUp(int key){
-	//if(!game_over){
-		//switch(key){
-			//case 100:
-			//left = false;
-			//case 101:
-			//player->isUp() = false;
-			//case 102:
-			//right = false;
-			//case 103:
-			//down = false;
-		//}
-	//}
+	if(!game_over){
+		switch(key){
+			case 100:
+			left = false;
+			case 101:
+			up = false;
+			case 102:
+			right = false;
+			case 103:
+			down = false;
+		}
+	}
 }
 
 void Game::tick(){
@@ -232,7 +243,7 @@ void Game::keyPress(unsigned char key) {
 	if (key == 27){
         // Exit the app when Esc key is pressed
 		delete player;
-		
+
 		for(unsigned i = 0; i < bullets.size(); i++){
 			delete bullets.at(i);
 		}
@@ -247,7 +258,7 @@ void Game::keyPress(unsigned char key) {
 			delete Powerup.at(i);
 		}
 
-		
+
 		delete this;
 
 		exit(0);
