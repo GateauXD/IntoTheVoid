@@ -14,8 +14,8 @@ Player::Player(int rate){
 	
 	up = down = left = right = false;
 }
-~Player::Player() {
-	std::cout << "Deleting Player" << std::endl;
+Player::~Player() {
+	//std::cout << "Deleting Player" << std::endl;
 }
 
 //Change these to fuctions. The move up and down things
@@ -24,30 +24,6 @@ void Player::movePos(unsigned char key) {
 		float x;
 		float y;
 
-		case 101:	//up
-			y = objectTex->getY();
-			if (y + speed <= 1.02) {
-				objectTex->setY(y + speed);
-			}
-			break;
-		case 100:	//left
-			x = objectTex->getX();
-			if (x - speed >= -1.02) {
-				objectTex->setX(x - speed);
-			}
-			break;
-		case 103:	//down
-			y = objectTex->getY();
-			if (y - objectTex->getH() - speed >= -1.02) {
-				objectTex->setY(y - speed);
-			}
-			break;
-		case 102:	//right
-			x = objectTex->getX();
-			if (x + objectTex->getW() + speed <= 1.02) {
-				objectTex->setX(x + speed);
-			}
-			break;
 		case 'w':	//up
 			y = objectTex->getY();
 			if (y + speed <= 1.02) {
@@ -62,13 +38,13 @@ void Player::movePos(unsigned char key) {
 			break;
 		case 's':	//down
 			y = objectTex->getY();
-			if (y - objectTex->getHeight() - speed >= -1.02) {
+			if (y - objectTex->getH() - speed >= -1.02) {
 				objectTex->setY(y - speed);
 			}
 			break;
 		case 'd':	//right
 			x = objectTex->getX();
-			if (x + objectTex->getWidth() + speed <= 1.02) {
+			if (x + objectTex->getW() + speed <= 1.02) {
 				objectTex->setX(x + speed);
 			}
 			break;
