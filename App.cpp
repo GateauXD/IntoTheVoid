@@ -81,13 +81,15 @@ void app_timer(int value){
 
 App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w, h){
     // Initialize state variables
-
+	std::cout<<"App\n";
 	singleton = this;
 	//app= singleton;
 	mx = 0.0;
 	my = 0.0;
 	
 	game = new Game(this);
+
+	std::cout<<"App Done\n";
 }
 
 void App::specialKeyPress(int key){

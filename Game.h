@@ -39,6 +39,7 @@ public:
 	void makeAsteroids(int n);
 	void makeBullet();
 	//void makeBall(int n);
+
 	~Game(){};	
 	 time_t spawnTimer;
 };

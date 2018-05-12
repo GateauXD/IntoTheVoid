@@ -22,6 +22,7 @@ void explodeShip(int value){
 }
 
 void app_timer(int value){
+	std::cout<<"App timer\n";
 	if (p->game->game_over){
 		p->game->gameOver->advance();
 	}
@@ -81,8 +82,9 @@ void app_timer(int value){
 
 Game::Game(App* a){
 	game_over = false;
+	std::cout<<"Game: a->game \n";
 	p=a;
-
+	p->game=this;
 	background = new TexRect("assests/background1.png", -1, 1, 2, 2);
 	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
 	score = new Score(0.7,0.9);
@@ -100,7 +102,8 @@ Game::Game(App* a){
 	makePowerup(1);
 	
 	time(&spawnTimer);
-	app_timer(1);
+
+	std::cout<<"Game Done\n";
 }
 /*
 void spawnEnemies(int n) {
