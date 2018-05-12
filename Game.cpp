@@ -85,7 +85,7 @@ Game::Game(App* a){
 	//std::cout<<"Game: a->game \n";
 	p=a;
 	p->game=this;
-	background = new TexRect("images/background1.png", -1, 1, 2, 2);
+	background = new TexRect("images/back.png", -1, 1, 2, 2);
 	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
 	score = new Score(0.7,0.9);
 
