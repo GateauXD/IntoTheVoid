@@ -65,6 +65,19 @@ bool Player::isRight() {
 	return right;
 }
 
+void Player::setUp(bool t) {
+	up = t;
+}
+void Player::setDown(bool t) {
+	down = t;
+}
+void Player::setLeft(bool t) {
+	left = t;
+}
+void Player::setRight(bool t) {
+	right = t;
+}
+
 void Player::moveUp(float d){
 	objectTex->moveUp(d);
 }

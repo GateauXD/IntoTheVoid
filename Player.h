@@ -25,6 +25,11 @@ public:
 	bool isLeft();
 	bool isRight();
 	
+	void setUp(bool t);
+	void setDown(bool t);
+	void setLeft(bool t);
+	void setRight(bool t);
+	
 	void moveUp(float d);
 	void moveDown(float d);
 	void moveLeft(float d);

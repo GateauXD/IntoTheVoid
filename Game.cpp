@@ -179,13 +179,13 @@ void Game::specialKeyPress(int key){
 	if(!game_over){
 		switch(key){
 			case 100:
-			left = true;
+			player->setLeft(true);
 			case 101:
-			up = true;
+			player->setUp(true);
 			case 102:
-			right = true;
+			player->setRight(true);
 			case 103:
-			down = true;
+			player->setDown(true);
 		}
 	}
 }
@@ -194,13 +194,13 @@ void Game::specialKeyUp(int key){
 	if(!game_over){
 		switch(key){
 			case 100:
-			left = false;
+			player->setLeft(false);
 			case 101:
-			up = false;
+			player->setUp(false);
 			case 102:
-			right = false;
+			player->setRight(false);
 			case 103:
-			down = false;
+			player->setDown(false);
 		}
 	}
 }
