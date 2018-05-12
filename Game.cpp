@@ -55,16 +55,16 @@ void app_timer(int value){
 		}
 	}
 
-	if (p->game->up){
+	if (p->game->player->isUp()){
 		p->game->player->moveUp(0.05);
 	}
-	if (p->game->down){
+	if (p->game->player->isDown()){
 		p->game->player->moveDown(0.05);
 	}
-	if (p->game->left){
+	if (p->game->player->isLeft()){
 		p->game->player->moveLeft(0.05);
 	}
-	if (p->game->right){
+	if (p->game->player->isRight()){
 		p->game->player->moveRight(0.05);
 	}
 
