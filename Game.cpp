@@ -22,7 +22,7 @@ void explodeShip(int value){
 }
 
 void app_timer(int value){
-	std::cout<<"App timer\n";
+	//std::cout<<"App timer\n";
 	if (p->game->game_over){
 		p->game->gameOver->advance();
 	}
@@ -82,10 +82,10 @@ void app_timer(int value){
 
 Game::Game(App* a){
 	game_over = false;
-	std::cout<<"Game: a->game \n";
+	//std::cout<<"Game: a->game \n";
 	p=a;
 	p->game=this;
-	background = new TexRect("assests/background1.png", -1, 1, 2, 2);
+	background = new TexRect("images/background1.png", -1, 1, 2, 2);
 	gameOver = new AnimatedRect("images/game_over.png", 7, 1, -1.0, 0.8, 2, 1.2);
 	score = new Score(0.7,0.9);
 
@@ -103,7 +103,7 @@ Game::Game(App* a){
 	
 	time(&spawnTimer);
 
-	std::cout<<"Game Done\n";
+	//std::cout<<"Game Done\n";
 }
 /*
 void spawnEnemies(int n) {
@@ -149,8 +149,8 @@ void Game::draw(){
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
-	background->draw();
+		background->draw();	
+
 	score->draw();
 
 	player->draw();

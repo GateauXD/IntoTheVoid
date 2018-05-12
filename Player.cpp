@@ -1,14 +1,14 @@
 #include "Player.h"
 
 Player::Player(){
-	objectTex = new TexRect("assets/PlayerShip.bmp","assets/fireball.bmp",6,6,0, -0.7, .2, .2);
+	objectTex = new TexRect("images/spaceship.pod_.1.red_.png","images/exp2_0.png",6,6,0, -0.7, .2, .2);
 	firerate = 5;
 	speed = 0.05;
 	
 	up = down = left = right  = false;
 }
 Player::Player(int rate){
-	objectTex = new TexRect("assets/PlayerShip.bmp","assets/fireball.bmp",6,6,0, -0.7, .2, .2);
+	objectTex = new TexRect("images/spaceship.pod_.1.red_.png","images/exp2_0.png",6,6,0, -0.7, .2, .2);
 	firerate = rate;
 	speed = 0.05;
 	
@@ -24,25 +24,25 @@ void Player::movePos(unsigned char key) {
 		float x;
 		float y;
 
-		case 'w':	//up
+		case 101:	//up
 			y = objectTex->getY();
 			if (y + speed <= 1.02) {
 				objectTex->setY(y + speed);
 			}
 			break;
-		case 'a':	//left
+		case 100:	//left
 			x = objectTex->getX();
 			if (x - speed >= -1.02) {
 				objectTex->setX(x - speed);
 			}
 			break;
-		case 's':	//down
+		case 103:	//down
 			y = objectTex->getY();
 			if (y - objectTex->getH() - speed >= -1.02) {
 				objectTex->setY(y - speed);
 			}
 			break;
-		case 'd':	//right
+		case 102:	//right
 			x = objectTex->getX();
 			if (x + objectTex->getW() + speed <= 1.02) {
 				objectTex->setX(x + speed);
@@ -79,7 +79,7 @@ void Player::moveRight(float d){
 }
 
 void Player::draw(){
-	objectTex->jump();
+	objectTex->draw();
 }
 
 void Player::explode(){
